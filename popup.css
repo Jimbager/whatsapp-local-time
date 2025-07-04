@@ -157,18 +157,24 @@ input:checked + .slider:before {
     margin-bottom: 8px;
 }
 
-.country-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+.countries-count {
+    text-align: center;
+    margin: 8px 0;
+    color: #3b4a54;
+    font-size: 14px;
 }
 
-.country-item {
-    background: #f0f2f5;
-    border-radius: 6px;
-    padding: 8px;
-    font-size: 14px;
-    color: #3b4a54;
+.count-number {
+    color: #128c7e;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.countries-note {
+    text-align: center;
+    color: #8696a0;
+    font-size: 12px;
+    margin: 4px 0;
 }
 
 /* 页脚 */

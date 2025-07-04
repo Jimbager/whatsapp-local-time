@@ -527,6 +527,12 @@ const countryTimezones = {
     utcOffset: "-06:00",
     name: "中部时间 (CST)",
   },
+  503: {
+    country: "萨尔瓦多",
+    timezone: "America/El_Salvador",
+    utcOffset: "-06:00",
+    name: "萨尔瓦多时间 (CST)",
+  },
 
   // 南美洲
   55: {
@@ -1091,6 +1097,10 @@ const countryNameToCode = {
   墨西哥: "52",
   Mexico: "52",
 
+  萨尔瓦多: "503",
+  "El Salvador": "503",
+  Salvador: "503",
+
   // 南美洲
   巴西: "55",
   Brazil: "55",
@@ -1231,12 +1241,41 @@ const countryNameToCode = {
 // 存储更新间隔的ID
 const timeIntervals = {};
 
+// 存储已打印过日志的未识别联系人，避免重复打印
+const loggedUnrecognizedContacts = new Set();
+
+// 存储主要扫描间隔ID
+let mainScanInterval = null;
+
 // 初始化
 function init() {
-  console.log("WhatsApp 当地时间显示器已启动");
-
-  // 定期检查聊天标题
-  setInterval(checkChatHeaders, 2000);
+  // 检查插件是否启用
+  chrome.storage.local.get(['enabled'], function(result) {
+    const isEnabled = result.enabled !== false; // 默认启用
+    
+    if (isEnabled) {
+      console.log("WhatsApp 当地时间显示器已启动");
+      
+      // 清除之前的扫描间隔（如果存在）
+      if (mainScanInterval) {
+        clearInterval(mainScanInterval);
+      }
+      
+      // 立即扫描一次
+      checkChatHeaders();
+      
+      // 定期检查聊天标题
+      mainScanInterval = setInterval(checkChatHeaders, 2000);
+    } else {
+      console.log("WhatsApp 当地时间显示器已禁用");
+      
+      // 清除扫描间隔
+      if (mainScanInterval) {
+        clearInterval(mainScanInterval);
+        mainScanInterval = null;
+      }
+    }
+  });
 }
 
 // 检查聊天标题并添加时区信息
@@ -1295,9 +1334,13 @@ function isValidChatWindowHeader(element) {
     return false;
   }
 
-  // 排除纯数字或特殊字符
+  // 排除纯数字或特殊字符，但允许可能的手机号格式
   if (/^[\d\s\-\+\(\)\.]+$/.test(text)) {
-    return false;
+    // 检查是否可能是手机号格式（包含+号和足够的数字）
+    const phonePattern = /\+\d{1,4}\s*\d+/;
+    if (!phonePattern.test(text)) {
+      return false;
+    }
   }
 
   // 排除消息状态或系统文本
@@ -1340,9 +1383,13 @@ function isValidChatListItem(element) {
     return false;
   }
 
-  // 排除纯数字或特殊字符
+  // 排除纯数字或特殊字符，但允许可能的手机号格式
   if (/^[\d\s\-\+\(\)\.]+$/.test(text)) {
-    return false;
+    // 检查是否可能是手机号格式（包含+号和足够的数字）
+    const phonePattern = /\+\d{1,4}\s*\d+/;
+    if (!phonePattern.test(text)) {
+      return false;
+    }
   }
 
   // 确保在聊天列表区域
@@ -1661,6 +1708,7 @@ function extractCountryCodeFromPhone(text) {
       "687",
       "678",
       "677",
+      "503",
     ],
     // 2位代码
     2: [
@@ -1726,7 +1774,11 @@ function extractCountryCodeFromPhone(text) {
     }
   }
 
-  console.log(`无法识别电话号码: ${text} (提取的数字: ${numbers})，请检查是否为支持的国家区号`);
+  // 避免重复打印相同的未识别联系人
+  if (!loggedUnrecognizedContacts.has(text)) {
+    console.log(`无法识别电话号码: ${text} (提取的数字: ${numbers})，请检查是否为支持的国家区号`);
+    loggedUnrecognizedContacts.add(text);
+  }
   return null;
 }
 
@@ -1781,7 +1833,11 @@ function extractCountryCodeFromName(text) {
     }
   }
 
-  console.log(`无法从名称识别国家: ${text}`);
+  // 避免重复打印相同的未识别联系人
+  if (!loggedUnrecognizedContacts.has(text)) {
+    console.log(`无法从名称识别国家: ${text}`);
+    loggedUnrecognizedContacts.add(text);
+  }
   return null;
 }
 
@@ -1956,12 +2012,39 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // 重新检查所有聊天标题
     checkChatHeaders();
   } else if (message.action === "enable") {
-    // 启用插件
+    // 启用插件 - 重新初始化并清除之前的状态
+    console.log("插件已启用，重新扫描联系人...");
+    
+    // 清除之前的状态标记，允许重新处理
+    document.querySelectorAll('[data-timezone-added]').forEach(el => {
+      el.removeAttribute('data-timezone-added');
+    });
+    
+    // 重新初始化
     init();
+    
+    // 立即扫描现有联系人
+    setTimeout(checkChatHeaders, 500);
   } else if (message.action === "disable") {
     // 禁用插件 - 清除所有时间显示
+    console.log("插件已禁用，清除所有时间显示...");
+    
+    // 清除主扫描间隔
+    if (mainScanInterval) {
+      clearInterval(mainScanInterval);
+      mainScanInterval = null;
+    }
+    
+    // 清除所有时间显示
     document.querySelectorAll(".timezone-display").forEach((el) => el.remove());
+    
+    // 清除所有时间更新间隔
     Object.values(timeIntervals).forEach(clearInterval);
     Object.keys(timeIntervals).forEach((key) => delete timeIntervals[key]);
+    
+    // 清除状态标记
+    document.querySelectorAll('[data-timezone-added]').forEach(el => {
+      el.removeAttribute('data-timezone-added');
+    });
   }
 });
