@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp时区显示器</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>🌍 WhatsApp时区显示器</h2>
+            <p>在聊天界面显示联系人当地时间</p>
+        </div>
+        
+        <div class="status-section">
+            <div class="status-info">
+                <span>状态:</span>
+                <span id="statusText" class="status-active">已启用</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="enableToggle" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <div class="info-section">
+            <h3>使用说明</h3>
+            <ol>
+                <li>联系人名称包含国家/地区名称，或</li>
+                <li>联系人名称包含电话号码（如+92 300 6526074）</li>
+                <li>插件会自动识别并显示当地时间</li>
+            </ol>
+        </div>
+        
+        <div class="supported-countries">
+            <h3>支持的国家/地区</h3>
+            <div class="country-grid">
+                <div class="country-item">🇨🇳 中国 (+86)</div>
+                <div class="country-item">🇺🇸 美国 (+1)</div>
+                <div class="country-item">🇬🇧 英国 (+44)</div>
+                <div class="country-item">🇯🇵 日本 (+81)</div>
+                <div class="country-item">🇰🇷 韩国 (+82)</div>
+                <div class="country-item">🇩🇪 德国 (+49)</div>
+                <div class="country-item">🇫🇷 法国 (+33)</div>
+                <div class="country-item">🇮🇳 印度 (+91)</div>
+                <div class="country-item">🇵🇰 巴基斯坦 (+92)</div>
+                <div class="country-item">🇧🇷 巴西 (+55)</div>
+                <div class="country-item">🇬🇪 格鲁吉亚 (+995)</div>
+                <div class="country-item">🇲🇾 马来西亚 (+60)</div>
+                <div class="country-item">🇭🇰 香港 (+852)</div>
+                <div class="country-item">🇸🇬 新加坡 (+65)</div>
+                <div class="country-item">🇦🇪 阿联酋 (+971)</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>版本 1.0 | <a href="#" id="openOptions">高级设置</a></p>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html> 

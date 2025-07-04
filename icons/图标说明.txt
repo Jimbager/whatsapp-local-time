@@ -1,0 +1,41 @@
+Chrome插件图标要求
+==================
+
+为了完成插件安装，您需要在此文件夹中添加以下3个PNG格式的图标文件：
+
+必需文件：
+----------
+1. icon16.png  - 16x16 像素，用于浏览器扩展栏
+2. icon48.png  - 48x48 像素，用于扩展管理页面
+3. icon128.png - 128x128 像素，用于Chrome网上应用店
+
+图标建议：
+----------
+- 使用时钟、地球、时区相关的图标
+- 背景透明的PNG格式
+- 颜色建议：蓝色系或绿色系，与界面风格匹配
+- 图标应该简洁明了，在小尺寸下仍然清晰可见
+
+免费图标资源：
+-----------
+1. 阿里巴巴矢量图标库 (iconfont.cn)
+2. Feather Icons (feathericons.com)
+3. Material Design Icons (materialdesignicons.com)
+4. Heroicons (heroicons.com)
+
+制作方法：
+----------
+1. 下载SVG格式的图标
+2. 使用在线工具转换为不同尺寸的PNG：
+   - TinyPNG (tinypng.com) - 压缩PNG
+   - CloudConvert (cloudconvert.com) - 格式转换
+   - Canva (canva.com) - 在线图片编辑
+
+注意事项：
+----------
+- 确保文件名完全一致：icon16.png, icon48.png, icon128.png
+- 图标背景建议透明
+- 避免使用过于复杂的图案
+- 测试在不同背景下的显示效果
+
+完成图标准备后，即可按照README.md中的说明安装插件。 

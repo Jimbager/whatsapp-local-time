@@ -1,0 +1,149 @@
+/* WhatsApp时区显示器的样式 */
+
+/* 聊天列表容器 - 设置为垂直布局 */
+#pane-side > div > div > div > div > div > div > div > div._ak8l._ap1_ > div._ak8o > div._ak8q > div > div,
+div[data-testid="cell-frame-container"] > div > div > div,
+div[role="listitem"] > div > div > div.x78zum5 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+}
+
+.timezone-display {
+    font-weight: 400 !important;
+    display: block !important;
+    opacity: 0.9 !important;
+    transition: all 0.3s ease !important;
+    font-family: inherit !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    border-radius: 3px !important;
+}
+
+/* 聊天列表中的时区显示（上下布局） */
+.timezone-display.timezone-list {
+    font-size: 14px !important;
+    margin-top: 2px !important;
+    padding: 1px 4px !important;
+    display: block !important;
+    width: fit-content !important;
+}
+
+/* 聊天窗口中的时区显示（水平布局） */
+.timezone-display.timezone-window {
+    font-size: 14px !important;
+    margin-left: 8px !important;
+    padding: 1px 4px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+
+.timezone-display:hover {
+    opacity: 1 !important;
+    transform: scale(1.02) !important;
+}
+
+/* 确保样式在WhatsApp的深色模式下也能正常显示 */
+[data-theme-dark="true"] .timezone-display {
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 移除工作时间颜色样式，改为单独控制状态图标和文本 */
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-2px); 
+    }
+    to { 
+        opacity: 0.9; 
+        transform: translateY(0); 
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 0.9; 
+    }
+    50% { 
+        opacity: 1; 
+    }
+}
+
+.timezone-display {
+    animation: fadeIn 0.5s ease-out !important;
+}
+
+/* 状态图标默认动画 */
+.timezone-display .status-icon {
+    animation: fadeIn 0.5s ease-out !important;
+}
+
+/* 工作时间状态图标脉动效果（通过JavaScript添加类） */
+.timezone-display .status-icon.working {
+    animation: fadeIn 0.5s ease-out, pulse 2s infinite !important;
+}
+
+/* 状态图标样式 */
+.timezone-display .status-icon {
+    display: inline-block !important;
+    margin-right: 4px !important;
+    font-size: 10px !important;
+    vertical-align: middle !important;
+}
+
+/* 时间文本样式 */
+.timezone-display .time-text {
+    color: #000000 !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    vertical-align: middle !important;
+}
+
+/* 深色模式下的时间文本颜色 */
+[data-theme-dark="true"] .timezone-display .time-text {
+    color: #e9edef !important;
+}
+
+/* 防止在不合适的地方显示时区 */
+.timezone-display {
+    /* 确保不会在消息时间戳附近重复显示 */
+    pointer-events: none !important;
+}
+
+/* 聊天列表特殊样式 */
+div[role="listitem"] .timezone-display.timezone-list {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    align-self: flex-start !important;
+}
+
+/* 聊天窗口header特殊样式 */
+header .timezone-display.timezone-window {
+    margin-left: 12px !important;
+}
+
+/* 确保聊天列表项目的文本容器支持垂直布局 */
+div[data-testid="cell-frame-container"] {
+    overflow: visible !important;
+}
+
+div[role="listitem"] > div {
+    overflow: visible !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+    .timezone-display.timezone-list {
+        font-size: 10px !important;
+        padding: 1px 2px !important;
+    }
+    
+    .timezone-display.timezone-window {
+        font-size: 14px !important;
+        margin-left: 6px !important;
+    }
+} 
