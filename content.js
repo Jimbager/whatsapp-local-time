@@ -277,6 +277,12 @@ const countryTimezones = {
     utcOffset: "+03:00",
     name: "也门时间 (AST)",
   },
+  960: {
+    country: "马尔代夫",
+    timezone: "Indian/Maldives",
+    utcOffset: "+05:00",
+    name: "马尔代夫时间 (MVT)",
+  },
   976: {
     country: "蒙古",
     timezone: "Asia/Ulaanbaatar",
@@ -533,6 +539,12 @@ const countryTimezones = {
     utcOffset: "-06:00",
     name: "萨尔瓦多时间 (CST)",
   },
+  1868: {
+    country: "特立尼达和多巴哥",
+    timezone: "America/Port_of_Spain",
+    utcOffset: "-04:00",
+    name: "大西洋标准时间 (AST)",
+  },
 
   // 南美洲
   55: {
@@ -759,6 +771,18 @@ const countryTimezones = {
     utcOffset: "+00:00",
     name: "格林威治时间 (GMT)",
   },
+  228: {
+    country: "多哥",
+    timezone: "Africa/Lome",
+    utcOffset: "+00:00",
+    name: "格林威治时间 (GMT)",
+  },
+  223: {
+    country: "马里",
+    timezone: "Africa/Bamako",
+    utcOffset: "+00:00",
+    name: "格林威治时间 (GMT)",
+  },
 
   // 大洋洲
   61: {
@@ -971,6 +995,9 @@ const countryNameToCode = {
   也门: "967",
   Yemen: "967",
 
+  马尔代夫: "960",
+  Maldives: "960",
+
   // 欧洲
   英国: "44",
   UK: "44",
@@ -1101,6 +1128,10 @@ const countryNameToCode = {
   "El Salvador": "503",
   Salvador: "503",
 
+  特立尼达和多巴哥: "1868",
+  "Trinidad and Tobago": "1868",
+  特多: "1868",
+
   // 南美洲
   巴西: "55",
   Brazil: "55",
@@ -1209,6 +1240,12 @@ const countryNameToCode = {
   塞内加尔: "221",
   Senegal: "221",
   塞内加尔: "221",
+
+  多哥: "228",
+  Togo: "228",
+
+  马里: "223",
+  Mali: "223",
 
   // 大洋洲
   澳大利亚: "61",
@@ -1620,6 +1657,10 @@ function extractCountryCodeFromPhone(text) {
 
   // 预定义已知的国家代码列表，按长度分组，优先匹配更长的代码
   const knownCodes = {
+    // 4位代码（最优先匹配）
+    4: [
+      "1868", // 特立尼达和多巴哥
+    ],
     // 3位代码（优先匹配）
     3: [
       "852",
@@ -1649,6 +1690,7 @@ function extractCountryCodeFromPhone(text) {
       "971",
       "968",
       "967",
+      "960", // 马尔代夫
       "976",
       "850",
       "353",
@@ -1699,7 +1741,9 @@ function extractCountryCodeFromPhone(text) {
       "266",
       "234",
       "233",
+      "228", // 多哥
       "225",
+      "223", // 马里
       "221",
       "679",
       "685",
@@ -1760,10 +1804,11 @@ function extractCountryCodeFromPhone(text) {
     1: ["1", "7"],
   };
 
-  // 按长度优先级匹配（3位→2位→1位）
-  for (const length of [3, 2, 1]) {
+  // 按长度优先级匹配（4位→3位→2位→1位）
+  for (const length of [4, 3, 2, 1]) {
     const possibleCode = numbers.substring(0, length);
     if (
+      knownCodes[length] && 
       knownCodes[length].includes(possibleCode) &&
       countryTimezones[possibleCode]
     ) {
