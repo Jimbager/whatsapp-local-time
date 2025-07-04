@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "WhatsApp时区显示器",
-  "version": "1.0",
+  "name": "WhatsApp 当地时间显示器",
+  "version": "1.1",
   "description": "在WhatsApp聊天界面中自动显示联系人所在地区的当地时间",
   "permissions": ["scripting", "storage"],
   "host_permissions": ["https://web.whatsapp.com/*"],
@@ -18,7 +18,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "WhatsApp时区显示器",
+    "default_title": "WhatsApp 当地时间显示器",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",

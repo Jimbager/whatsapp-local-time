@@ -3,7 +3,7 @@
 // 当扩展程序首次安装或更新时触发
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
-    console.log("WhatsApp时区显示器已安装");
+    console.log("WhatsApp 当地时间显示器已安装");
 
     // 设置默认配置
     chrome.storage.local.set({
@@ -13,7 +13,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       customCountries: {},
     });
   } else if (details.reason === "update") {
-    console.log("WhatsApp时区显示器已更新");
+    console.log("WhatsApp 当地时间显示器已更新");
   }
 });
 

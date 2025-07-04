@@ -1,4 +1,4 @@
-// WhatsApp时区显示器 - 弹出窗口脚本
+// WhatsApp 当地时间显示器 - 弹出窗口脚本
 
 // DOM元素
 const enableToggle = document.getElementById("enableToggle");

@@ -1186,16 +1186,13 @@ const countryNameToCode = {
 
   斯威士兰: "268",
   Swaziland: "268",
-  斯威士兰: "268",
   莱索托: "266",
   Lesotho: "266",
 
   尼日利亚: "234",
   Nigeria: "234",
-  尼日利亚: "234",
   加纳: "233",
   Ghana: "233",
-  加纳: "233",
   科特迪瓦: "225",
   "Ivory Coast": "225",
   "Cote dIvoire": "225",
@@ -1236,7 +1233,7 @@ const timeIntervals = {};
 
 // 初始化
 function init() {
-  console.log("WhatsApp时区显示器已启动");
+  console.log("WhatsApp 当地时间显示器已启动");
 
   // 定期检查聊天标题
   setInterval(checkChatHeaders, 2000);
@@ -1559,11 +1556,20 @@ function extractCountryCodeFromPhone(text) {
   // 移除所有空格、连字符和括号
   const cleaned = text.replace(/[\s\-\(\)]/g, "");
 
-  // 查找+号后的数字
-  const phoneMatch = cleaned.match(/\+(\d+)/);
-  if (!phoneMatch) return null;
-
-  const numbers = phoneMatch[1];
+  // 查找+号后的数字，或者以数字开头的情况
+  let phoneMatch = cleaned.match(/\+(\d+)/);
+  let numbers = phoneMatch ? phoneMatch[1] : null;
+  
+  // 如果没有找到+号，尝试匹配以数字开头的情况（可能是没有+号的区号）
+  if (!numbers) {
+    const directMatch = cleaned.match(/^(\d+)/);
+    if (directMatch && directMatch[1].length >= 1 && directMatch[1].length <= 4) {
+      numbers = directMatch[1];
+      console.log(`尝试识别无+号的区号: ${numbers}`);
+    }
+  }
+  
+  if (!numbers) return null;
 
   // 预定义已知的国家代码列表，按长度分组，优先匹配更长的代码
   const knownCodes = {
@@ -1720,7 +1726,7 @@ function extractCountryCodeFromPhone(text) {
     }
   }
 
-  console.log(`无法识别电话号码: ${text} (提取的数字: ${numbers})`);
+  console.log(`无法识别电话号码: ${text} (提取的数字: ${numbers})，请检查是否为支持的国家区号`);
   return null;
 }
 
