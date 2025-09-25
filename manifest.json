@@ -1,10 +1,14 @@
 {
   "manifest_version": 3,
   "name": "WhatsApp 当地时间显示器",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "在WhatsApp聊天界面中自动显示联系人所在地区的当地时间",
   "permissions": ["storage"],
-  "host_permissions": ["https://web.whatsapp.com/*"],
+  "host_permissions": [
+    "https://web.whatsapp.com/*",
+    "https://cdn.jsdelivr.net/*",
+    "https://unpkg.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -29,5 +33,11 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["countries.json"],
+      "matches": ["https://web.whatsapp.com/*"]
+    }
+  ]
 }

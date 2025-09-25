@@ -1,0 +1,1752 @@
+[
+  {
+    "cn": ["阿富汗"],
+    "code_2": "AF",
+    "code_3": "AFG",
+    "timezone": "UTC+4:30",
+    "phone_code": "93"
+  },
+  {
+    "cn": ["阿尔巴尼亚"],
+    "code_2": "AL",
+    "code_3": "ALB",
+    "timezone": "UTC+1:00",
+    "phone_code": "355"
+  },
+  {
+    "cn": ["阿尔及利亚"],
+    "code_2": "DZ",
+    "code_3": "DZA",
+    "timezone": "UTC+1:00",
+    "phone_code": "213"
+  },
+  {
+    "cn": ["美属萨摩亚"],
+    "code_2": "AS",
+    "code_3": "ASM",
+    "timezone": "UTC-11:00",
+    "phone_code": "1684"
+  },
+  {
+    "cn": ["安道尔"],
+    "code_2": "AD",
+    "code_3": "AND",
+    "timezone": "UTC+1:00",
+    "phone_code": "376"
+  },
+  {
+    "cn": ["安哥拉"],
+    "code_2": "AO",
+    "code_3": "AGO",
+    "timezone": "UTC+1:00",
+    "phone_code": "244"
+  },
+  {
+    "cn": ["安圭拉"],
+    "code_2": "AI",
+    "code_3": "AIA",
+    "timezone": "UTC-4:00",
+    "phone_code": "1264"
+  },
+  {
+    "cn": ["安提瓜和巴布达"],
+    "code_2": "AG",
+    "code_3": "ATG",
+    "timezone": "UTC-4:00",
+    "phone_code": "1268"
+  },
+  {
+    "cn": ["阿根廷"],
+    "code_2": "AR",
+    "code_3": "ARG",
+    "timezone": "UTC-3:00",
+    "phone_code": "54"
+  },
+  {
+    "cn": ["亚美尼亚"],
+    "code_2": "AM",
+    "code_3": "ARM",
+    "timezone": "UTC+4:00",
+    "phone_code": "374"
+  },
+  {
+    "cn": ["阿鲁巴"],
+    "code_2": "AW",
+    "code_3": "ABW",
+    "timezone": "UTC-4:00",
+    "phone_code": "297"
+  },
+  {
+    "cn": ["澳大利亚", "澳洲"],
+    "code_2": "AU",
+    "code_3": "AUS",
+    "timezone": "UTC+10:00",
+    "phone_code": "61"
+  },
+  {
+    "cn": ["奥地利"],
+    "code_2": "AT",
+    "code_3": "AUT",
+    "timezone": "UTC+1:00",
+    "phone_code": "43"
+  },
+  {
+    "cn": ["阿塞拜疆"],
+    "code_2": "AZ",
+    "code_3": "AZE",
+    "timezone": "UTC+4:00",
+    "phone_code": "994"
+  },
+  {
+    "cn": ["巴哈马"],
+    "code_2": "BS",
+    "code_3": "BHS",
+    "timezone": "UTC-5:00",
+    "phone_code": "1242"
+  },
+  {
+    "cn": ["巴林"],
+    "code_2": "BH",
+    "code_3": "BHR",
+    "timezone": "UTC+3:00",
+    "phone_code": "973"
+  },
+  {
+    "cn": ["孟加拉国", "孟加拉"],
+    "code_2": "BD",
+    "code_3": "BGD",
+    "timezone": "UTC+6:00",
+    "phone_code": "880"
+  },
+  {
+    "cn": ["巴巴多斯"],
+    "code_2": "BB",
+    "code_3": "BRB",
+    "timezone": "UTC-4:00",
+    "phone_code": "1246"
+  },
+  {
+    "cn": ["白俄罗斯"],
+    "code_2": "BY",
+    "code_3": "BLR",
+    "timezone": "UTC+2:00",
+    "phone_code": "375"
+  },
+  {
+    "cn": ["比利时"],
+    "code_2": "BE",
+    "code_3": "BEL",
+    "timezone": "UTC+1:00",
+    "phone_code": "32"
+  },
+  {
+    "cn": ["伯利兹"],
+    "code_2": "BZ",
+    "code_3": "BLZ",
+    "timezone": "UTC-6:00",
+    "phone_code": "501"
+  },
+  {
+    "cn": ["贝宁"],
+    "code_2": "BJ",
+    "code_3": "BEN",
+    "timezone": "UTC+1:00",
+    "phone_code": "229"
+  },
+  {
+    "cn": ["百慕大"],
+    "code_2": "BM",
+    "code_3": "BMU",
+    "timezone": "UTC-4:00",
+    "phone_code": "1441"
+  },
+  {
+    "cn": ["不丹"],
+    "code_2": "BT",
+    "code_3": "BTN",
+    "timezone": "UTC+6:00",
+    "phone_code": "975"
+  },
+  {
+    "cn": ["玻利维亚"],
+    "code_2": "BO",
+    "code_3": "BOL",
+    "timezone": "UTC-4:00",
+    "phone_code": "591"
+  },
+  {
+    "cn": ["波黑", "波斯尼亚和黑塞哥维那"],
+    "code_2": "BA",
+    "code_3": "BIH",
+    "timezone": "UTC+1:00",
+    "phone_code": "387"
+  },
+  {
+    "cn": ["博茨瓦纳"],
+    "code_2": "BW",
+    "code_3": "BWA",
+    "timezone": "UTC+2:00",
+    "phone_code": "267"
+  },
+  {
+    "cn": ["布韦岛"],
+    "code_2": "BV",
+    "code_3": "BVT",
+    "timezone": "UTC+1:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["巴西"],
+    "code_2": "BR",
+    "code_3": "BRA",
+    "timezone": "UTC-3:00",
+    "phone_code": "55"
+  },
+  {
+    "cn": ["英属印度洋领地"],
+    "code_2": "IO",
+    "code_3": "IOT",
+    "timezone": "UTC+6:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["英属维尔京群岛"],
+    "code_2": "VG",
+    "code_3": "VGB",
+    "timezone": "UTC-4:00",
+    "phone_code": "1340"
+  },
+  {
+    "cn": ["文莱"],
+    "code_2": "BN",
+    "code_3": "BRN",
+    "timezone": "UTC+8:00",
+    "phone_code": "673"
+  },
+  {
+    "cn": ["保加利亚"],
+    "code_2": "BG",
+    "code_3": "BGR",
+    "timezone": "UTC+2:00",
+    "phone_code": "359"
+  },
+  {
+    "cn": ["布基纳法索"],
+    "code_2": "BF",
+    "code_3": "BFA",
+    "timezone": "UTC+0:00",
+    "phone_code": "226"
+  },
+  {
+    "cn": ["缅甸"],
+    "code_2": "MM",
+    "code_3": "MMR",
+    "timezone": "UTC+6:30",
+    "phone_code": "95"
+  },
+  {
+    "cn": ["布隆迪"],
+    "code_2": "BI",
+    "code_3": "BDI",
+    "timezone": "UTC+2:00",
+    "phone_code": "257"
+  },
+  {
+    "cn": ["佛得角"],
+    "code_2": "CV",
+    "code_3": "CPV",
+    "timezone": "UTC-1:00",
+    "phone_code": "238"
+  },
+  {
+    "cn": ["柬埔寨", "高棉"],
+    "code_2": "KH",
+    "code_3": "KHM",
+    "timezone": "UTC+7:00",
+    "phone_code": "855"
+  },
+  {
+    "cn": ["喀麦隆"],
+    "code_2": "CM",
+    "code_3": "CMR",
+    "timezone": "UTC+1:00",
+    "phone_code": "237"
+  },
+  {
+    "cn": ["加拿大"],
+    "code_2": "CA",
+    "code_3": "CAN",
+    "timezone": "UTC-5:00",
+    "phone_code": "1"
+  },
+  {
+    "cn": ["开曼群岛"],
+    "code_2": "KY",
+    "code_3": "CYM",
+    "timezone": "UTC-5:00",
+    "phone_code": "1345"
+  },
+  {
+    "cn": ["中非", "中非共和国"],
+    "code_2": "CF",
+    "code_3": "CAF",
+    "timezone": "UTC+1:00",
+    "phone_code": "236"
+  },
+  {
+    "cn": ["乍得"],
+    "code_2": "TD",
+    "code_3": "TCD",
+    "timezone": "UTC+1:00",
+    "phone_code": "235"
+  },
+  {
+    "cn": ["智利"],
+    "code_2": "CL",
+    "code_3": "CHL",
+    "timezone": "UTC-4:00",
+    "phone_code": "56"
+  },
+  {
+    "cn": ["中国", "中华人民共和国", "中国大陆", "大陆"],
+    "code_2": "CN",
+    "code_3": "CHN",
+    "timezone": "UTC+8:00",
+    "phone_code": "86"
+  },
+  {
+    "cn": ["圣诞岛"],
+    "code_2": "CX",
+    "code_3": "CXR",
+    "timezone": "UTC+7:00",
+    "phone_code": "619164"
+  },
+  {
+    "cn": ["科科斯（基林）群岛"],
+    "code_2": "CC",
+    "code_3": "CCK",
+    "timezone": "UTC+06:30",
+    "phone_code": "619162"
+  },
+  {
+    "cn": ["哥伦比亚"],
+    "code_2": "CO",
+    "code_3": "COL",
+    "timezone": "UTC-5:00",
+    "phone_code": "57"
+  },
+  {
+    "cn": ["科摩罗"],
+    "code_2": "KM",
+    "code_3": "COM",
+    "timezone": "UTC+3:00",
+    "phone_code": "269"
+  },
+  {
+    "cn": ["刚果民主共和国", "刚果（金）", "刚果金"],
+    "code_2": "CD",
+    "code_3": "COD",
+    "timezone": "UTC+1:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["刚果共和国", "刚果（布）", "刚果布"],
+    "code_2": "CG",
+    "code_3": "COG",
+    "timezone": "UTC+1:00",
+    "phone_code": "242"
+  },
+  {
+    "cn": ["库克群岛"],
+    "code_2": "CK",
+    "code_3": "COK",
+    "timezone": "UTC-10:00",
+    "phone_code": "682"
+  },
+  {
+    "cn": ["哥斯达黎加"],
+    "code_2": "CR",
+    "code_3": "CRI",
+    "timezone": "UTC-6:00",
+    "phone_code": "506"
+  },
+  {
+    "cn": ["科特迪瓦", "象牙海岸", "科特迪瓦共和国"],
+    "code_2": "CI",
+    "code_3": "CIV",
+    "timezone": "UTC+0:00",
+    "phone_code": "225"
+  },
+  {
+    "cn": ["克罗地亚"],
+    "code_2": "HR",
+    "code_3": "HRV",
+    "timezone": "UTC+1:00",
+    "phone_code": "385"
+  },
+  {
+    "cn": ["古巴"],
+    "code_2": "CU",
+    "code_3": "CUB",
+    "timezone": "UTC-5:00",
+    "phone_code": "53"
+  },
+  {
+    "cn": ["库拉索"],
+    "code_2": "CW",
+    "code_3": "CUW",
+    "timezone": "UTC-4:00",
+    "phone_code": "599"
+  },
+  {
+    "cn": ["塞浦路斯"],
+    "code_2": "CY",
+    "code_3": "CYP",
+    "timezone": "UTC+2:00",
+    "phone_code": "357"
+  },
+  {
+    "cn": ["捷克", "捷克共和国"],
+    "code_2": "CZ",
+    "code_3": "CZE",
+    "timezone": "UTC+1:00",
+    "phone_code": "420"
+  },
+  {
+    "cn": ["丹麦"],
+    "code_2": "DK",
+    "code_3": "DNK",
+    "timezone": "UTC+1:00",
+    "phone_code": "45"
+  },
+  {
+    "cn": ["吉布提"],
+    "code_2": "DJ",
+    "code_3": "DJI",
+    "timezone": "UTC+3:00",
+    "phone_code": "253"
+  },
+  {
+    "cn": ["多米尼克"],
+    "code_2": "DM",
+    "code_3": "DMA",
+    "timezone": "UTC-4:00",
+    "phone_code": "1767"
+  },
+  {
+    "cn": ["多米尼加"],
+    "code_2": "DO",
+    "code_3": "DOM",
+    "timezone": "UTC-4:00",
+    "phone_code": "1809"
+  },
+  {
+    "cn": ["厄瓜多尔"],
+    "code_2": "EC",
+    "code_3": "ECU",
+    "timezone": "UTC-5:00",
+    "phone_code": "593"
+  },
+  {
+    "cn": ["埃及"],
+    "code_2": "EG",
+    "code_3": "EGY",
+    "timezone": "UTC+2:00",
+    "phone_code": "20"
+  },
+  {
+    "cn": ["萨尔瓦多"],
+    "code_2": "SV",
+    "code_3": "SLV",
+    "timezone": "UTC-6:00",
+    "phone_code": "503"
+  },
+  {
+    "cn": ["赤道几内亚"],
+    "code_2": "GQ",
+    "code_3": "GNQ",
+    "timezone": "UTC+1:00",
+    "phone_code": "240"
+  },
+  {
+    "cn": ["厄立特里亚"],
+    "code_2": "ER",
+    "code_3": "ERI",
+    "timezone": "UTC+3:00",
+    "phone_code": "291"
+  },
+  {
+    "cn": ["爱沙尼亚"],
+    "code_2": "EE",
+    "code_3": "EST",
+    "timezone": "UTC+2:00",
+    "phone_code": "372"
+  },
+  {
+    "cn": ["埃塞俄比亚"],
+    "code_2": "ET",
+    "code_3": "ETH",
+    "timezone": "UTC+3:00",
+    "phone_code": "251"
+  },
+  {
+    "cn": ["福克兰群岛"],
+    "code_2": "FK",
+    "code_3": "FLK",
+    "timezone": "UTC-4:00",
+    "phone_code": "500"
+  },
+  {
+    "cn": ["法罗群岛"],
+    "code_2": "FO",
+    "code_3": "FRO",
+    "timezone": "UTC+0:00",
+    "phone_code": "298"
+  },
+  {
+    "cn": ["斐济"],
+    "code_2": "FJ",
+    "code_3": "FJI",
+    "timezone": "UTC+12:00",
+    "phone_code": "679"
+  },
+  {
+    "cn": ["芬兰"],
+    "code_2": "FI",
+    "code_3": "FIN",
+    "timezone": "UTC+2:00",
+    "phone_code": "358"
+  },
+  {
+    "cn": ["法国"],
+    "code_2": "FR",
+    "code_3": "FRA",
+    "timezone": "UTC+1:00",
+    "phone_code": "33"
+  },
+  {
+    "cn": ["法国本土"],
+    "code_2": "FX",
+    "code_3": null,
+    "timezone": "UTC+1:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["法属圭亚那"],
+    "code_2": "GF",
+    "code_3": "GUF",
+    "timezone": "UTC-3:00",
+    "phone_code": "594"
+  },
+  {
+    "cn": ["法属波利尼西亚"],
+    "code_2": "PF",
+    "code_3": "PYF",
+    "timezone": "UTC-10:00",
+    "phone_code": "689"
+  },
+  {
+    "cn": ["加蓬"],
+    "code_2": "GA",
+    "code_3": "GAB",
+    "timezone": "UTC+1:00",
+    "phone_code": "241"
+  },
+  {
+    "cn": ["冈比亚"],
+    "code_2": "GM",
+    "code_3": "GMB",
+    "timezone": "UTC+0:00",
+    "phone_code": "220"
+  },
+  {
+    "cn": ["巴勒斯坦"],
+    "code_2": "PS",
+    "code_3": "PSE",
+    "timezone": "UTC+2:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["格鲁吉亚", "乔治亚"],
+    "code_2": "GE",
+    "code_3": "GEO",
+    "timezone": "UTC+4:00",
+    "phone_code": "995"
+  },
+  {
+    "cn": ["德国"],
+    "code_2": "DE",
+    "code_3": "DEU",
+    "timezone": "UTC+1:00",
+    "phone_code": "49"
+  },
+  {
+    "cn": ["加纳"],
+    "code_2": "GH",
+    "code_3": "GHA",
+    "timezone": "UTC+0:00",
+    "phone_code": "233"
+  },
+  {
+    "cn": ["直布罗陀"],
+    "code_2": "GI",
+    "code_3": "GIB",
+    "timezone": "UTC+2:00",
+    "phone_code": "350"
+  },
+  {
+    "cn": ["希腊"],
+    "code_2": "GR",
+    "code_3": "GRC",
+    "timezone": "UTC+2:00",
+    "phone_code": "30"
+  },
+  {
+    "cn": ["格陵兰"],
+    "code_2": "GL",
+    "code_3": "GRL",
+    "timezone": "UTC+0:00",
+    "phone_code": "299"
+  },
+  {
+    "cn": ["格林纳达"],
+    "code_2": "GD",
+    "code_3": "GRD",
+    "timezone": "UTC-4:00",
+    "phone_code": "1473"
+  },
+  {
+    "cn": ["瓜德罗普"],
+    "code_2": "GP",
+    "code_3": "GLP",
+    "timezone": "UTC-4:00",
+    "phone_code": "590"
+  },
+  {
+    "cn": ["关岛"],
+    "code_2": "GU",
+    "code_3": "GUM",
+    "timezone": "UTC+10:00",
+    "phone_code": "1671"
+  },
+  {
+    "cn": ["危地马拉"],
+    "code_2": "GT",
+    "code_3": "GTM",
+    "timezone": "UTC-6:00",
+    "phone_code": "502"
+  },
+  {
+    "cn": ["根西"],
+    "code_2": "GG",
+    "code_3": "GGY",
+    "timezone": "UTC+0:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["几内亚"],
+    "code_2": "GN",
+    "code_3": "GIN",
+    "timezone": "UTC+0:00",
+    "phone_code": "224"
+  },
+  {
+    "cn": ["几内亚比绍"],
+    "code_2": "GW",
+    "code_3": "GNB",
+    "timezone": "UTC+0:00",
+    "phone_code": "245"
+  },
+  {
+    "cn": ["圭亚那"],
+    "code_2": "GY",
+    "code_3": "GUY",
+    "timezone": "UTC-4:00",
+    "phone_code": "592"
+  },
+  {
+    "cn": ["海地"],
+    "code_2": "HT",
+    "code_3": "HTI",
+    "timezone": "UTC-5:00",
+    "phone_code": "509"
+  },
+  {
+    "cn": ["赫德岛和麦克唐纳群岛"],
+    "code_2": "HM",
+    "code_3": "HMD",
+    "timezone": "UTC+0:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["梵蒂冈", "梵蒂冈城国"],
+    "code_2": "VA",
+    "code_3": "VAT",
+    "timezone": "UTC+1:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["洪都拉斯"],
+    "code_2": "HN",
+    "code_3": "HND",
+    "timezone": "UTC-6:00",
+    "phone_code": "504"
+  },
+  {
+    "cn": ["中国香港", "香港", "香港特别行政区", "香港特区"],
+    "code_2": "HK",
+    "code_3": "HKG",
+    "timezone": "UTC+8:00",
+    "phone_code": "852"
+  },
+  {
+    "cn": ["匈牙利"],
+    "code_2": "HU",
+    "code_3": "HUN",
+    "timezone": "UTC+1:00",
+    "phone_code": "36"
+  },
+  {
+    "cn": ["冰岛"],
+    "code_2": "IS",
+    "code_3": "ISL",
+    "timezone": "UTC+0:00",
+    "phone_code": "354"
+  },
+  {
+    "cn": ["印度"],
+    "code_2": "IN",
+    "code_3": "IND",
+    "timezone": "UTC+5:30",
+    "phone_code": "91"
+  },
+  {
+    "cn": ["印尼", "印度尼西亚"],
+    "code_2": "ID",
+    "code_3": "IDN",
+    "timezone": "UTC+7:00",
+    "phone_code": "62"
+  },
+  {
+    "cn": ["伊朗", "伊朗伊斯兰共和国"],
+    "code_2": "IR",
+    "code_3": "IRN",
+    "timezone": "UTC+3:30",
+    "phone_code": "98"
+  },
+  {
+    "cn": ["伊拉克"],
+    "code_2": "IQ",
+    "code_3": "IRQ",
+    "timezone": "UTC+3:00",
+    "phone_code": "964"
+  },
+  {
+    "cn": ["爱尔兰"],
+    "code_2": "IE",
+    "code_3": "IRL",
+    "timezone": "UTC+0:00",
+    "phone_code": "353"
+  },
+  {
+    "cn": ["马恩岛"],
+    "code_2": "IM",
+    "code_3": "IMN",
+    "timezone": "UTC+0:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["以色列"],
+    "code_2": "IL",
+    "code_3": "ISR",
+    "timezone": "UTC+2:00",
+    "phone_code": "972"
+  },
+  {
+    "cn": ["意大利"],
+    "code_2": "IT",
+    "code_3": "ITA",
+    "timezone": "UTC+1:00",
+    "phone_code": "39"
+  },
+  {
+    "cn": ["牙买加"],
+    "code_2": "JM",
+    "code_3": "JAM",
+    "timezone": "UTC-5:00",
+    "phone_code": "1876"
+  },
+  {
+    "cn": ["日本"],
+    "code_2": "JP",
+    "code_3": "JPN",
+    "timezone": "UTC+9:00",
+    "phone_code": "81"
+  },
+  {
+    "cn": ["泽西"],
+    "code_2": "JE",
+    "code_3": "JEY",
+    "timezone": "UTC+0:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["约旦"],
+    "code_2": "JO",
+    "code_3": "JOR",
+    "timezone": "UTC+2:00",
+    "phone_code": "962"
+  },
+  {
+    "cn": ["哈萨克斯坦", "哈萨克"],
+    "code_2": "KZ",
+    "code_3": "KAZ",
+    "timezone": "UTC+5:00",
+    "phone_code": "7"
+  },
+  {
+    "cn": ["肯尼亚"],
+    "code_2": "KE",
+    "code_3": "KEN",
+    "timezone": "UTC+3:00",
+    "phone_code": "254"
+  },
+  {
+    "cn": ["基里巴斯"],
+    "code_2": "KI",
+    "code_3": "KIR",
+    "timezone": "UTC+12:00",
+    "phone_code": "686"
+  },
+  {
+    "cn": ["朝鲜", "北韩", "朝鲜民主主义人民共和国"],
+    "code_2": "KP",
+    "code_3": "PRK",
+    "timezone": "UTC+9:00",
+    "phone_code": "85"
+  },
+  {
+    "cn": ["韩国", "南韩", "大韩民国"],
+    "code_2": "KR",
+    "code_3": "KOR",
+    "timezone": "UTC+9:00",
+    "phone_code": "82"
+  },
+  {
+    "cn": ["科索沃"],
+    "code_2": "XK",
+    "code_3": null,
+    "timezone": "UTC+1:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["科威特"],
+    "code_2": "KW",
+    "code_3": "KWT",
+    "timezone": "UTC+3:00",
+    "phone_code": "965"
+  },
+  {
+    "cn": ["吉尔吉斯斯坦", "吉尔吉斯"],
+    "code_2": "KG",
+    "code_3": "KGZ",
+    "timezone": "UTC+6:00",
+    "phone_code": "996"
+  },
+  {
+    "cn": ["老挝", "寮国"],
+    "code_2": "LA",
+    "code_3": "LAO",
+    "timezone": "UTC+7:00",
+    "phone_code": "856"
+  },
+  {
+    "cn": ["拉脱维亚"],
+    "code_2": "LV",
+    "code_3": "LVA",
+    "timezone": "UTC+2:00",
+    "phone_code": "371"
+  },
+  {
+    "cn": ["黎巴嫩"],
+    "code_2": "LB",
+    "code_3": "LBN",
+    "timezone": "UTC+2:00",
+    "phone_code": "961"
+  },
+  {
+    "cn": ["莱索托"],
+    "code_2": "LS",
+    "code_3": "LSO",
+    "timezone": "UTC+2:00",
+    "phone_code": "266"
+  },
+  {
+    "cn": ["利比里亚"],
+    "code_2": "LR",
+    "code_3": "LBR",
+    "timezone": "UTC+0:00",
+    "phone_code": "231"
+  },
+  {
+    "cn": ["利比亚"],
+    "code_2": "LY",
+    "code_3": "LBY",
+    "timezone": "UTC+2:00",
+    "phone_code": "218"
+  },
+  {
+    "cn": ["列支敦士登"],
+    "code_2": "LI",
+    "code_3": "LIE",
+    "timezone": "UTC+1:00",
+    "phone_code": "423"
+  },
+  {
+    "cn": ["立陶宛"],
+    "code_2": "LT",
+    "code_3": "LTU",
+    "timezone": "UTC+2:00",
+    "phone_code": "370"
+  },
+  {
+    "cn": ["卢森堡"],
+    "code_2": "LU",
+    "code_3": "LUX",
+    "timezone": "UTC+1:00",
+    "phone_code": "352"
+  },
+  {
+    "cn": ["中国澳门", "澳门", "澳门特别行政区", "澳门特区"],
+    "code_2": "MO",
+    "code_3": "MAC",
+    "timezone": "UTC+8:00",
+    "phone_code": "853"
+  },
+  {
+    "cn": ["北马其顿", "马其顿", "北马其顿共和国"],
+    "code_2": "MK",
+    "code_3": "MKD",
+    "timezone": "UTC+1:00",
+    "phone_code": "389"
+  },
+  {
+    "cn": ["马达加斯加"],
+    "code_2": "MG",
+    "code_3": "MDG",
+    "timezone": "UTC+3:00",
+    "phone_code": "261"
+  },
+  {
+    "cn": ["马拉维"],
+    "code_2": "MW",
+    "code_3": "MWI",
+    "timezone": "UTC+2:00",
+    "phone_code": "265"
+  },
+  {
+    "cn": ["马来西亚"],
+    "code_2": "MY",
+    "code_3": "MYS",
+    "timezone": "UTC+8:00",
+    "phone_code": "60"
+  },
+  {
+    "cn": ["马尔代夫"],
+    "code_2": "MV",
+    "code_3": "MDV",
+    "timezone": "UTC+5:00",
+    "phone_code": "960"
+  },
+  {
+    "cn": ["马里"],
+    "code_2": "ML",
+    "code_3": "MLI",
+    "timezone": "UTC+0:00",
+    "phone_code": "223"
+  },
+  {
+    "cn": ["马耳他"],
+    "code_2": "MT",
+    "code_3": "MLT",
+    "timezone": "UTC+1:00",
+    "phone_code": "356"
+  },
+  {
+    "cn": ["马绍尔群岛"],
+    "code_2": "MH",
+    "code_3": "MHL",
+    "timezone": "UTC+12:00",
+    "phone_code": "692"
+  },
+  {
+    "cn": ["马提尼克"],
+    "code_2": "MQ",
+    "code_3": "MTQ",
+    "timezone": "UTC-4:00",
+    "phone_code": "596"
+  },
+  {
+    "cn": ["毛里塔尼亚"],
+    "code_2": "MR",
+    "code_3": "MRT",
+    "timezone": "UTC+0:00",
+    "phone_code": "222"
+  },
+  {
+    "cn": ["毛里求斯"],
+    "code_2": "MU",
+    "code_3": "MUS",
+    "timezone": "UTC+4:00",
+    "phone_code": "230"
+  },
+  {
+    "cn": ["马约特"],
+    "code_2": "YT",
+    "code_3": "MYT",
+    "timezone": "UTC+3:00",
+    "phone_code": "269"
+  },
+  {
+    "cn": ["墨西哥"],
+    "code_2": "MX",
+    "code_3": "MEX",
+    "timezone": "UTC-6:00",
+    "phone_code": "52"
+  },
+  {
+    "cn": ["密克罗尼西亚联邦"],
+    "code_2": "FM",
+    "code_3": "FSM",
+    "timezone": "UTC+10:00",
+    "phone_code": "691"
+  },
+  {
+    "cn": ["摩尔多瓦"],
+    "code_2": "MD",
+    "code_3": "MDA",
+    "timezone": "UTC+2:00",
+    "phone_code": "373"
+  },
+  {
+    "cn": ["摩纳哥"],
+    "code_2": "MC",
+    "code_3": "MCO",
+    "timezone": "UTC+1:00",
+    "phone_code": "377"
+  },
+  {
+    "cn": ["蒙古"],
+    "code_2": "MN",
+    "code_3": "MNG",
+    "timezone": "UTC+8:00",
+    "phone_code": "976"
+  },
+  {
+    "cn": ["黑山"],
+    "code_2": "ME",
+    "code_3": "MNE",
+    "timezone": "UTC+1:00",
+    "phone_code": "382"
+  },
+  {
+    "cn": ["蒙特塞拉特"],
+    "code_2": "MS",
+    "code_3": "MSR",
+    "timezone": "UTC-4:00",
+    "phone_code": "1664"
+  },
+  {
+    "cn": ["摩洛哥"],
+    "code_2": "MA",
+    "code_3": "MAR",
+    "timezone": "UTC+0:00",
+    "phone_code": "212"
+  },
+  {
+    "cn": ["莫桑比克"],
+    "code_2": "MZ",
+    "code_3": "MOZ",
+    "timezone": "UTC+2:00",
+    "phone_code": "258"
+  },
+  {
+    "cn": ["纳米比亚"],
+    "code_2": "NA",
+    "code_3": "NAM",
+    "timezone": "UTC+1:00",
+    "phone_code": "264"
+  },
+  {
+    "cn": ["瑙鲁"],
+    "code_2": "NR",
+    "code_3": "NRU",
+    "timezone": "UTC+12:00",
+    "phone_code": "674"
+  },
+  {
+    "cn": ["尼泊尔"],
+    "code_2": "NP",
+    "code_3": "NPL",
+    "timezone": "UTC+5:45",
+    "phone_code": "977"
+  },
+  {
+    "cn": ["荷兰"],
+    "code_2": "NL",
+    "code_3": "NLD",
+    "timezone": "UTC+1:00",
+    "phone_code": "31"
+  },
+  {
+    "cn": ["荷属安的列斯"],
+    "code_2": "AN",
+    "code_3": null,
+    "timezone": "UTC-4:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["新喀里多尼亚"],
+    "code_2": "NC",
+    "code_3": "NCL",
+    "timezone": "UTC+11:00",
+    "phone_code": "687"
+  },
+  {
+    "cn": ["新西兰"],
+    "code_2": "NZ",
+    "code_3": "NZL",
+    "timezone": "UTC+12:00",
+    "phone_code": "64"
+  },
+  {
+    "cn": ["尼加拉瓜"],
+    "code_2": "NI",
+    "code_3": "NIC",
+    "timezone": "UTC-6:00",
+    "phone_code": "505"
+  },
+  {
+    "cn": ["尼日尔"],
+    "code_2": "NE",
+    "code_3": "NER",
+    "timezone": "UTC+1:00",
+    "phone_code": "227"
+  },
+  {
+    "cn": ["尼日利亚"],
+    "code_2": "NG",
+    "code_3": "NGA",
+    "timezone": "UTC+1:00",
+    "phone_code": "234"
+  },
+  {
+    "cn": ["纽埃"],
+    "code_2": "NU",
+    "code_3": "NIU",
+    "timezone": "UTC-11:00",
+    "phone_code": "683"
+  },
+  {
+    "cn": ["诺福克岛"],
+    "code_2": "NF",
+    "code_3": "NFK",
+    "timezone": "UTC+11:00",
+    "phone_code": "6723"
+  },
+  {
+    "cn": ["北马里亚纳群岛"],
+    "code_2": "MP",
+    "code_3": "MNP",
+    "timezone": "UTC+10:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["挪威"],
+    "code_2": "NO",
+    "code_3": "NOR",
+    "timezone": "UTC+1:00",
+    "phone_code": "47"
+  },
+  {
+    "cn": ["阿曼"],
+    "code_2": "OM",
+    "code_3": "OMN",
+    "timezone": "UTC+4:00",
+    "phone_code": "968"
+  },
+  {
+    "cn": ["巴基斯坦"],
+    "code_2": "PK",
+    "code_3": "PAK",
+    "timezone": "UTC+5:00",
+    "phone_code": "92"
+  },
+  {
+    "cn": ["帕劳"],
+    "code_2": "PW",
+    "code_3": "PLW",
+    "timezone": "UTC+9:00",
+    "phone_code": "680"
+  },
+  {
+    "cn": ["巴拿马"],
+    "code_2": "PA",
+    "code_3": "PAN",
+    "timezone": "UTC-5:00",
+    "phone_code": "507"
+  },
+  {
+    "cn": ["巴布亚新几内亚"],
+    "code_2": "PG",
+    "code_3": "PNG",
+    "timezone": "UTC+10:00",
+    "phone_code": "675"
+  },
+  {
+    "cn": ["巴拉圭"],
+    "code_2": "PY",
+    "code_3": "PRY",
+    "timezone": "UTC-4:00",
+    "phone_code": "595"
+  },
+  {
+    "cn": ["秘鲁"],
+    "code_2": "PE",
+    "code_3": "PER",
+    "timezone": "UTC-5:00",
+    "phone_code": "51"
+  },
+  {
+    "cn": ["菲律宾"],
+    "code_2": "PH",
+    "code_3": "PHL",
+    "timezone": "UTC+8:00",
+    "phone_code": "63"
+  },
+  {
+    "cn": ["皮特凯恩群岛"],
+    "code_2": "PN",
+    "code_3": "PCN",
+    "timezone": "UTC-8:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["波兰"],
+    "code_2": "PL",
+    "code_3": "POL",
+    "timezone": "UTC+1:00",
+    "phone_code": "48"
+  },
+  {
+    "cn": ["葡萄牙"],
+    "code_2": "PT",
+    "code_3": "PRT",
+    "timezone": "UTC+0:00",
+    "phone_code": "351"
+  },
+  {
+    "cn": ["波多黎各"],
+    "code_2": "PR",
+    "code_3": "PRI",
+    "timezone": "UTC-4:00",
+    "phone_code": "1787"
+  },
+  {
+    "cn": ["卡塔尔"],
+    "code_2": "QA",
+    "code_3": "QAT",
+    "timezone": "UTC+3:00",
+    "phone_code": "974"
+  },
+  {
+    "cn": ["留尼汪"],
+    "code_2": "RE",
+    "code_3": "REU",
+    "timezone": "UTC+4:00",
+    "phone_code": "262"
+  },
+  {
+    "cn": ["罗马尼亚"],
+    "code_2": "RO",
+    "code_3": "ROU",
+    "timezone": "UTC+2:00",
+    "phone_code": "40"
+  },
+  {
+    "cn": ["中国台湾", "台湾", "台灣"],
+    "code_2": "TW",
+    "code_3": "TWN",
+    "timezone": "UTC+8:00",
+    "phone_code": "886"
+  },
+  {
+    "cn": ["俄罗斯", "俄联邦"],
+    "code_2": "RU",
+    "code_3": "RUS",
+    "timezone": "UTC+3:00",
+    "phone_code": "7"
+  },
+  {
+    "cn": ["卢旺达"],
+    "code_2": "RW",
+    "code_3": "RWA",
+    "timezone": "UTC+2:00",
+    "phone_code": "250"
+  },
+  {
+    "cn": ["圣巴泰勒米"],
+    "code_2": "BL",
+    "code_3": "BLM",
+    "timezone": "UTC-4:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["圣赫勒拿、阿森松和特里斯坦-达库尼亚"],
+    "code_2": "SH",
+    "code_3": "SHN",
+    "timezone": "UTC+0:00",
+    "phone_code": "247"
+  },
+  {
+    "cn": ["圣基茨和尼维斯"],
+    "code_2": "KN",
+    "code_3": "KNA",
+    "timezone": "UTC-4:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["圣卢西亚"],
+    "code_2": "LC",
+    "code_3": "LCA",
+    "timezone": "UTC-4:00",
+    "phone_code": "1758"
+  },
+  {
+    "cn": ["法属圣马丁"],
+    "code_2": "MF",
+    "code_3": "MAF",
+    "timezone": "UTC-4:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["圣文森特和格林纳丁斯"],
+    "code_2": "VC",
+    "code_3": "VCT",
+    "timezone": "UTC-4:00",
+    "phone_code": "1784"
+  },
+  {
+    "cn": ["萨摩亚"],
+    "code_2": "WS",
+    "code_3": "WSM",
+    "timezone": "UTC+13:00",
+    "phone_code": "685"
+  },
+  {
+    "cn": ["圣马力诺"],
+    "code_2": "SM",
+    "code_3": "SMR",
+    "timezone": "UTC+1:00",
+    "phone_code": "378"
+  },
+  {
+    "cn": ["圣多美和普林西比"],
+    "code_2": "ST",
+    "code_3": "STP",
+    "timezone": "UTC+0:00",
+    "phone_code": "239"
+  },
+  {
+    "cn": ["沙特阿拉伯", "沙特"],
+    "code_2": "SA",
+    "code_3": "SAU",
+    "timezone": "UTC+3:00",
+    "phone_code": "966"
+  },
+  {
+    "cn": ["塞内加尔"],
+    "code_2": "SN",
+    "code_3": "SEN",
+    "timezone": "UTC+0:00",
+    "phone_code": "221"
+  },
+  {
+    "cn": ["塞尔维亚"],
+    "code_2": "RS",
+    "code_3": "SRB",
+    "timezone": "UTC+1:00",
+    "phone_code": "381"
+  },
+  {
+    "cn": ["塞舌尔"],
+    "code_2": "SC",
+    "code_3": "SYC",
+    "timezone": "UTC+4:00",
+    "phone_code": "248"
+  },
+  {
+    "cn": ["塞拉利昂"],
+    "code_2": "SL",
+    "code_3": "SLE",
+    "timezone": "UTC+0:00",
+    "phone_code": "232"
+  },
+  {
+    "cn": ["新加坡"],
+    "code_2": "SG",
+    "code_3": "SGP",
+    "timezone": "UTC+8:00",
+    "phone_code": "65"
+  },
+  {
+    "cn": ["荷属圣马丁"],
+    "code_2": "SX",
+    "code_3": "SXM",
+    "timezone": "UTC-4:00",
+    "phone_code": "1721"
+  },
+  {
+    "cn": ["斯洛伐克"],
+    "code_2": "SK",
+    "code_3": "SVK",
+    "timezone": "UTC+1:00",
+    "phone_code": "421"
+  },
+  {
+    "cn": ["斯洛文尼亚"],
+    "code_2": "SI",
+    "code_3": "SVN",
+    "timezone": "UTC+1:00",
+    "phone_code": "386"
+  },
+  {
+    "cn": ["所罗门群岛"],
+    "code_2": "SB",
+    "code_3": "SLB",
+    "timezone": "UTC+11:00",
+    "phone_code": "677"
+  },
+  {
+    "cn": ["索马里"],
+    "code_2": "SO",
+    "code_3": "SOM",
+    "timezone": "UTC+3:00",
+    "phone_code": "252"
+  },
+  {
+    "cn": ["南非"],
+    "code_2": "ZA",
+    "code_3": "ZAF",
+    "timezone": "UTC+2:00",
+    "phone_code": "27"
+  },
+  {
+    "cn": ["南乔治亚和南桑威奇群岛"],
+    "code_2": "GS",
+    "code_3": "SGS",
+    "timezone": "UTC-2:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["南苏丹"],
+    "code_2": "SS",
+    "code_3": "SSD",
+    "timezone": "UTC+2:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["西班牙"],
+    "code_2": "ES",
+    "code_3": "ESP",
+    "timezone": "UTC+1:00",
+    "phone_code": "34"
+  },
+  {
+    "cn": ["斯里兰卡"],
+    "code_2": "LK",
+    "code_3": "LKA",
+    "timezone": "UTC+5:30",
+    "phone_code": "94"
+  },
+  {
+    "cn": ["苏丹"],
+    "code_2": "SD",
+    "code_3": "SDN",
+    "timezone": "UTC+3:00",
+    "phone_code": "249"
+  },
+  {
+    "cn": ["苏里南"],
+    "code_2": "SR",
+    "code_3": "SUR",
+    "timezone": "UTC-3:00",
+    "phone_code": "597"
+  },
+  {
+    "cn": ["圣皮埃尔和密克隆"],
+    "code_2": "PM",
+    "code_3": "SPM",
+    "timezone": "UTC-3:00",
+    "phone_code": "508"
+  },
+  {
+    "cn": ["斯威士兰", "埃斯瓦蒂尼", "斯威士王国"],
+    "code_2": "SZ",
+    "code_3": "SWZ",
+    "timezone": "UTC+2:00",
+    "phone_code": "268"
+  },
+  {
+    "cn": ["瑞典"],
+    "code_2": "SE",
+    "code_3": "SWE",
+    "timezone": "UTC+1:00",
+    "phone_code": "46"
+  },
+  {
+    "cn": ["瑞士"],
+    "code_2": "CH",
+    "code_3": "CHE",
+    "timezone": "UTC+1:00",
+    "phone_code": "41"
+  },
+  {
+    "cn": ["叙利亚", "阿拉伯叙利亚共和国"],
+    "code_2": "SY",
+    "code_3": "SYR",
+    "timezone": "UTC+2:00",
+    "phone_code": "963"
+  },
+  {
+    "cn": ["塔吉克斯坦", "塔吉克"],
+    "code_2": "TJ",
+    "code_3": "TJK",
+    "timezone": "UTC+5:00",
+    "phone_code": "992"
+  },
+  {
+    "cn": ["坦桑尼亚", "坦桑"],
+    "code_2": "TZ",
+    "code_3": "TZA",
+    "timezone": "UTC+3:00",
+    "phone_code": "255"
+  },
+  {
+    "cn": ["泰国"],
+    "code_2": "TH",
+    "code_3": "THA",
+    "timezone": "UTC+7:00",
+    "phone_code": "66"
+  },
+  {
+    "cn": ["东帝汶"],
+    "code_2": "TL",
+    "code_3": "TLS",
+    "timezone": "UTC+9:00",
+    "phone_code": "670"
+  },
+  {
+    "cn": ["多哥"],
+    "code_2": "TG",
+    "code_3": "TGO",
+    "timezone": "UTC+0:00",
+    "phone_code": "228"
+  },
+  {
+    "cn": ["托克劳"],
+    "code_2": "TK",
+    "code_3": "TKL",
+    "timezone": "UTC-11:00",
+    "phone_code": "690"
+  },
+  {
+    "cn": ["汤加"],
+    "code_2": "TO",
+    "code_3": "TON",
+    "timezone": "UTC-11:00",
+    "phone_code": "676"
+  },
+  {
+    "cn": ["特立尼达和多巴哥"],
+    "code_2": "TT",
+    "code_3": "TTO",
+    "timezone": "UTC-4:00",
+    "phone_code": "1868"
+  },
+  {
+    "cn": ["突尼斯"],
+    "code_2": "TN",
+    "code_3": "TUN",
+    "timezone": "UTC+1:00",
+    "phone_code": "216"
+  },
+  {
+    "cn": ["土耳其", "图尔其", "土耳其共和国"],
+    "code_2": "TR",
+    "code_3": "TUR",
+    "timezone": "UTC+2:00",
+    "phone_code": "90"
+  },
+  {
+    "cn": ["土库曼斯坦", "土库曼"],
+    "code_2": "TM",
+    "code_3": "TKM",
+    "timezone": "UTC+5:00",
+    "phone_code": "993"
+  },
+  {
+    "cn": ["特克斯和凯科斯群岛"],
+    "code_2": "TC",
+    "code_3": "TCA",
+    "timezone": "UTC-5:00",
+    "phone_code": "1649"
+  },
+  {
+    "cn": ["图瓦卢"],
+    "code_2": "TV",
+    "code_3": "TUV",
+    "timezone": "UTC+12:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["乌干达"],
+    "code_2": "UG",
+    "code_3": "UGA",
+    "timezone": "UTC+3:00",
+    "phone_code": "256"
+  },
+  {
+    "cn": ["乌克兰"],
+    "code_2": "UA",
+    "code_3": "UKR",
+    "timezone": "UTC+2:00",
+    "phone_code": "380"
+  },
+  {
+    "cn": ["阿联酋", "阿拉伯联合酋长国", "阿联"],
+    "code_2": "AE",
+    "code_3": "ARE",
+    "timezone": "UTC+3:00",
+    "phone_code": "971"
+  },
+  {
+    "cn": ["英国", "不列颠"],
+    "code_2": "GB",
+    "code_3": "GBR",
+    "timezone": "UTC+0:00",
+    "phone_code": "44"
+  },
+  {
+    "cn": ["美国", "美利坚合众国"],
+    "code_2": "US",
+    "code_3": "USA",
+    "timezone": "UTC-6:00",
+    "phone_code": "1907"
+  },
+  {
+    "cn": ["美国本土外小岛屿"],
+    "code_2": "UM",
+    "code_3": "UMI",
+    "timezone": "UTC-6:00",
+    "phone_code": "1808"
+  },
+  {
+    "cn": ["乌拉圭"],
+    "code_2": "UY",
+    "code_3": "URY",
+    "timezone": "UTC-3:00",
+    "phone_code": "598"
+  },
+  {
+    "cn": ["乌兹别克斯坦", "乌兹别克"],
+    "code_2": "UZ",
+    "code_3": "UZB",
+    "timezone": "UTC+5:00",
+    "phone_code": "998"
+  },
+  {
+    "cn": ["瓦努阿图"],
+    "code_2": "VU",
+    "code_3": "VUT",
+    "timezone": "UTC+11:00",
+    "phone_code": "678"
+  },
+  {
+    "cn": ["委内瑞拉"],
+    "code_2": "VE",
+    "code_3": "VEN",
+    "timezone": "UTC-4:30",
+    "phone_code": "58"
+  },
+  {
+    "cn": ["越南"],
+    "code_2": "VN",
+    "code_3": "VNM",
+    "timezone": "UTC+7:00",
+    "phone_code": "84"
+  },
+  {
+    "cn": ["美属维尔京群岛"],
+    "code_2": "VI",
+    "code_3": "VIR",
+    "timezone": "UTC-4:00",
+    "phone_code": "1284"
+  },
+  {
+    "cn": ["瓦利斯和富图纳"],
+    "code_2": "WF",
+    "code_3": "WLF",
+    "timezone": "UTC+12:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["巴勒斯坦", "巴勒斯坦国"],
+    "code_2": "PS",
+    "code_3": "PSE",
+    "timezone": "UTC+2:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["西撒哈拉"],
+    "code_2": "EH",
+    "code_3": "ESH",
+    "timezone": "UTC+0:00",
+    "phone_code": null
+  },
+  {
+    "cn": ["也门"],
+    "code_2": "YE",
+    "code_3": "YEM",
+    "timezone": "UTC+3:00",
+    "phone_code": "967"
+  },
+  {
+    "cn": ["赞比亚"],
+    "code_2": "ZM",
+    "code_3": "ZMB",
+    "timezone": "UTC+2:00",
+    "phone_code": "260"
+  },
+  {
+    "cn": ["津巴布韦"],
+    "code_2": "ZW",
+    "code_3": "ZWE",
+    "timezone": "UTC+2:00",
+    "phone_code": "263"
+  },
+  {
+    "cn": ["波希米亚", "玻利维亚"],
+    "code_2": "BO",
+    "code_3": "BOL",
+    "timezone": "UTC+1:00",
+    "phone_code": "591"
+  },
+  {
+    "cn": ["捷克斯洛伐克"],
+    "code_2": "TC",
+    "code_3": "TCA",
+    "timezone": "UTC+1:00",
+    "phone_code": "1649"
+  }
+]

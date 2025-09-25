@@ -1,5 +1,5 @@
-// 国家代码到时区信息的映射 - 包含全球所有主要国家
-const countryTimezones = {
+// 国家代码到时区信息的映射 - 改为运行时从 countries.json 生成
+let countryTimezones = {
   // 亚洲
   86: {
     country: "中国",
@@ -841,8 +841,8 @@ const countryTimezones = {
   },
 };
 
-// 国家名称到国家代码的映射 - 包含中英文全称和简称
-const countryNameToCode = {
+// 国家名称到国家代码的映射 - 由 countries.json 生成
+let countryNameToCode = {
   // 中国及地区
   中国: "86",
   China: "86",
@@ -1280,32 +1280,287 @@ const timeIntervals = {};
 
 // 存储已打印过日志的未识别联系人，避免重复打印
 const loggedUnrecognizedContacts = new Set();
+// 已失败的标题（避免重复尝试）
+const failedHeaderTexts = new Set();
 
 // 存储主要扫描间隔ID
 let mainScanInterval = null;
+let countriesData = null; // 源数据（countries.json）
+// 快速索引
+let nameToCountry = new Map(); // 中文名 -> country
+let code2ToCountry = new Map(); // CODE2(大写) -> country
+let code3ToCountry = new Map(); // CODE3(大写) -> country
+let phoneToCountry = new Map(); // 纯数字phone_code -> country
+
+// 全局调试与数据就绪标志
+var DEBUG_WLT = typeof DEBUG_WLT === "boolean" ? DEBUG_WLT : true;
+if (typeof window !== "undefined") {
+  if (typeof window.DEBUG_WLT === "undefined") {
+    window.DEBUG_WLT = DEBUG_WLT;
+  } else {
+    DEBUG_WLT = window.DEBUG_WLT;
+  }
+}
+var DATA_READY = false;
+
+async function loadCountriesJson() {
+  try {
+    if (DEBUG_WLT) console.log("[WLT] 开始加载 countries.json...");
+    // 通过扩展可访问资源路径加载
+    const url = chrome.runtime.getURL("countries.json");
+    const res = await fetch(url, { cache: "no-cache" });
+    if (!res.ok) throw new Error(`加载 countries.json 失败: ${res.status}`);
+    countriesData = await res.json();
+
+    // 由 countries.json 生成 countryNameToCode 与 countryTimezones（仅偏移）
+    countryNameToCode = {};
+    countryTimezones = {};
+    nameToCountry = new Map();
+    code2ToCountry = new Map();
+    code3ToCountry = new Map();
+    phoneToCountry = new Map();
+
+    const seenCode2 = new Set();
+
+    countriesData.forEach((item) => {
+      const cnList = Array.isArray(item.cn)
+        ? item.cn
+        : [item.cn].filter(Boolean);
+      const primaryCn = (cnList[0] || "").trim();
+      const code2 = (item.code_2 || "").trim();
+      const code3 = (item.code_3 || "").trim();
+      const tz = (item.timezone || "").trim(); // 如 UTC+8:00
+      const phone = (
+        item.phone_code == null ? "" : String(item.phone_code)
+      ).trim();
+
+      // 跳过重复的 code_2，优先采用首次出现的记录
+      if (code2 && seenCode2.has(code2.toUpperCase())) {
+        if (DEBUG_WLT)
+          console.log(
+            `[WLT] 跳过重复代码 ${code2} 的记录: ${cnList.join("/")}`
+          );
+        return;
+      }
+      if (code2) seenCode2.add(code2.toUpperCase());
+
+      if (primaryCn) {
+        countryNameToCode[primaryCn] = primaryCn; // 兼容旧逻辑
+      }
+
+      // 所有别称入索引
+      const countryMeta = {
+        cn: primaryCn,
+        code2,
+        code3,
+        phone,
+        tz,
+        aliases: cnList.filter(Boolean),
+      };
+      cnList.forEach((aliasRaw) => {
+        const alias = String(aliasRaw || "").trim();
+        if (!alias) return;
+        nameToCountry.set(alias, countryMeta);
+      });
+
+      if (code2) {
+        code2ToCountry.set(code2.toUpperCase(), {
+          cn: primaryCn,
+          code2,
+          code3,
+          phone,
+          tz,
+        });
+      }
+
+      if (code3) {
+        code3ToCountry.set(code3.toUpperCase(), {
+          cn: primaryCn,
+          code2,
+          code3,
+          phone,
+          tz,
+        });
+      }
+
+      if (phone) {
+        // 只存纯数字
+        const digits = phone.replace(/[^0-9]/g, "");
+        if (digits)
+          phoneToCountry.set(digits, {
+            cn: primaryCn,
+            code2,
+            code3,
+            phone: digits,
+            tz,
+          });
+      }
+
+      if (tz) {
+        // 为主名与所有别称分别建立条目（country 显示为该别称），保证命中任意别称都能正确显示
+        const utc = tz.replace("UTC", "");
+        cnList.forEach((aliasRaw) => {
+          const alias = String(aliasRaw || "").trim();
+          if (alias) {
+            countryTimezones[alias] = {
+              country: alias,
+              timezone: null, // 无 IANA，使用偏移兜底
+              utcOffset: utc,
+              name: alias,
+            };
+          }
+        });
+      }
+    });
+
+    DATA_READY = true;
+    if (DEBUG_WLT)
+      console.log(
+        `[WLT] countries.json 加载完成，共 ${countriesData.length} 条。索引：name:${nameToCountry.size} code2:${code2ToCountry.size} code3:${code3ToCountry.size} phone:${phoneToCountry.size}`
+      );
+  } catch (e) {
+    console.error("countries.json 加载失败:", e);
+    DATA_READY = false;
+  }
+}
+
+// 中文顺序模糊匹配：统计 candidate 中按顺序能在 text 中匹配到的中文字符数量（非必须连续）
+// 例如 text="圣格..." 与 candidate="圣文森特和格林纳丁斯" 命中为2；text="格圣" 命中为1（顺序不一致），不足阈值则不采用
+function computeSequentialChineseOverlap(text, candidate) {
+  if (!text || !candidate) return 0;
+  const textChars = String(text).match(/[\u4e00-\u9fff]/g) || [];
+  const candChars = String(candidate).match(/[\u4e00-\u9fff]/g) || [];
+  if (textChars.length === 0 || candChars.length === 0) return 0;
+  let i = 0;
+  let hit = 0;
+  for (const ch of candChars) {
+    while (i < textChars.length && textChars[i] !== ch) i++;
+    if (i < textChars.length) {
+      hit++;
+      i++;
+    }
+  }
+  return hit;
+}
+
+// 按优先级解析联系人文本 -> 国家：
+// 1) 国家中文名称(包含匹配)
+// 2) 三位国家代码（独立词，精准边界）
+// 3) 两位国家代码（独立词，精准边界，避免将 ACNF 识别为 CN）
+// 4) 带"+"的国家区号（最长匹配优先）
+function resolveCountryFromText(rawText) {
+  if (!rawText) return null;
+  const text = String(rawText);
+
+  // 1) 中文名称包含匹配（按长度从长到短，避免"印度尼西亚"被错判为"印度"）
+  const chineseKeys = Array.from(nameToCountry.keys()).filter((k) =>
+    /[\u4e00-\u9fff]/.test(k)
+  );
+  chineseKeys.sort((a, b) => b.length - a.length);
+  for (const cn of chineseKeys) {
+    if (cn && text.includes(cn)) {
+      if (DEBUG_WLT) console.log(`[WLT] 名称命中: "${cn}" <- "${text}"`);
+      const meta = nameToCountry.get(cn);
+      return { ...meta, matchedName: cn };
+    }
+  }
+
+  // 2) 三位代码：按独立词边界匹配（英文/数字边界）
+  // 提取可能的词并检查
+  const tokens = text.match(/[A-Za-z]{2,3}/g) || [];
+  for (const token of tokens) {
+    if (token.length === 3) {
+      const up = token.toUpperCase();
+      if (code3ToCountry.has(up)) {
+        if (DEBUG_WLT) console.log(`[WLT] 3位代码命中: ${up} <- "${text}"`);
+        const meta = code3ToCountry.get(up);
+        return { ...meta, matchedName: meta.cn };
+      }
+    }
+  }
+
+  // 3) 两位代码：按独立词边界匹配，避免在更长词中匹配（例如 ACNF 不应匹配 CN）
+  // 使用严格边界检测：(^|[^A-Za-z0-9])XX([^A-Za-z0-9]|$)
+  for (const [code2, country] of code2ToCountry.entries()) {
+    const re = new RegExp(`(^|[^A-Za-z0-9])${code2}([^A-Za-z0-9]|$)`, "i");
+    if (re.test(text)) {
+      if (DEBUG_WLT) console.log(`[WLT] 2位代码命中: ${code2} <- "${text}"`);
+      return { ...country, matchedName: country.cn };
+    }
+  }
+
+  // 4) 带"+"的电话区号：提取所有+后数字串，规范化为纯数字，按最长匹配优先
+  const plusMatches = text.match(/\+[\d\s\-()]+/g) || [];
+  let best = null;
+  for (const m of plusMatches) {
+    const digits = m.replace(/[^0-9]/g, "");
+    if (!digits) continue;
+    // 前缀最长匹配：尝试整串、再依次缩短
+    for (let len = Math.min(digits.length, 6); len >= 1; len--) {
+      const prefix = digits.substring(0, len);
+      if (phoneToCountry.has(prefix)) {
+        // 选择更长的匹配
+        if (!best || prefix.length > best.matchLen) {
+          const c = phoneToCountry.get(prefix);
+          best = { country: c, matchLen: prefix.length, src: m };
+        }
+        break;
+      }
+    }
+  }
+  if (best) {
+    if (DEBUG_WLT)
+      console.log(`[WLT] 区号命中: +${best.matchLen}位前缀 来自 "${best.src}"`);
+    return { ...best.country, matchedName: best.country.cn };
+  }
+
+  // 5) 中文顺序模糊兜底（最低优先级）：按顺序命中最多中文字符的别称作为匹配；至少命中2个字
+  let fuzzyBest = null; // { country, hits, keyLen, key }
+  for (const cn of chineseKeys) {
+    const hits = computeSequentialChineseOverlap(text, cn);
+    if (hits >= 2) {
+      const candidate = nameToCountry.get(cn);
+      if (
+        !fuzzyBest ||
+        hits > fuzzyBest.hits ||
+        (hits === fuzzyBest.hits && cn.length > fuzzyBest.keyLen)
+      ) {
+        fuzzyBest = { country: candidate, hits, keyLen: cn.length, key: cn };
+      }
+    }
+  }
+  if (fuzzyBest && DEBUG_WLT) {
+    console.log(
+      `[WLT] 模糊兜底: 命中${fuzzyBest.hits}字 选择 "${fuzzyBest.key}" <- "${text}"`
+    );
+  }
+  return fuzzyBest
+    ? { ...fuzzyBest.country, matchedName: fuzzyBest.key }
+    : null;
+}
 
 // 初始化
 function init() {
   // 检查插件是否启用
-  chrome.storage.local.get(['enabled'], function(result) {
+  chrome.storage.local.get(["enabled"], function (result) {
     const isEnabled = result.enabled !== false; // 默认启用
-    
+
     if (isEnabled) {
       console.log("WhatsApp 当地时间显示器已启动");
-      
+
       // 清除之前的扫描间隔（如果存在）
       if (mainScanInterval) {
         clearInterval(mainScanInterval);
       }
-      
+
       // 立即扫描一次
       checkChatHeaders();
-      
+
       // 定期检查聊天标题
       mainScanInterval = setInterval(checkChatHeaders, 2000);
     } else {
       console.log("WhatsApp 当地时间显示器已禁用");
-      
+
       // 清除扫描间隔
       if (mainScanInterval) {
         clearInterval(mainScanInterval);
@@ -1317,19 +1572,43 @@ function init() {
 
 // 检查聊天标题并添加时区信息
 function checkChatHeaders() {
-  // 1. 处理聊天列表中的联系人（侧边栏） - 更精确的选择器
+  if (!DATA_READY) {
+    if (DEBUG_WLT) console.log("[WLT] 数据未就绪，跳过本轮扫描");
+    return;
+  }
+  // 1. 处理聊天列表中的联系人（侧边栏） - 更新选择器以匹配新的类名结构
   const chatListItems = document.querySelectorAll(`
         #pane-side div[role="listitem"] div[role="gridcell"] span[title]:not([data-timezone-added]),
-        #pane-side div[role="gridcell"] span._11JPr[title]:not([data-timezone-added])
+        #pane-side div[role="gridcell"] span._11JPr[title]:not([data-timezone-added]),
+        #pane-side div[role="listitem"] div[role="gridcell"] div._ak8o span[title]:not([data-timezone-added]),
+        #pane-side div[role="listitem"] div[role="gridcell"] div._ak8q span[title]:not([data-timezone-added]),
+        #pane-side div[role="listitem"] div[role="gridcell"] div._ak8q div.x1c4vz4f span[title]:not([data-timezone-added]),
+        #pane-side div[role="listitem"] div[role="gridcell"] div._ak8q div.xuxw1ft span[title]:not([data-timezone-added]),
+        #pane-side div[role="listitem"] div[role="gridcell"] div._ak8q div.xuxw1ft span.x1iyjqo2[title]:not([data-timezone-added]),
+        #pane-side div[role="listitem"] div._ap1_ > div:first-child span[dir="auto"][title]:not([data-timezone-added])
     `);
 
+  console.log(`找到 ${chatListItems.length} 个聊天列表项`);
+
   chatListItems.forEach((item) => {
-    // 确保在聊天列表区域且不是搜索结果
+    // 确保在聊天列表区域且不是搜索结果，且位于 ._ap1_ 的第一个 div 内
+    const ap1 = item.closest("._ap1_");
+    const inFirstBlock = ap1
+      ? ap1.querySelector("div:first-child")?.contains(item)
+      : true;
+    const inSecondBlock = ap1
+      ? ap1.querySelector("div:nth-child(2)")?.contains(item)
+      : false;
+
     if (
       (item.closest('[data-testid="cell-frame-container"]') ||
         item.closest('div[role="listitem"]')) &&
-      !item.closest('[data-testid="search"]')
+      !item.closest('[data-testid="search"]') &&
+      !item.closest("._ak8j") &&
+      inFirstBlock &&
+      !inSecondBlock
     ) {
+      console.log(`处理聊天列表项: ${item.textContent || item.title}`);
       processHeaderForChatList(item);
     }
   });
@@ -1344,6 +1623,37 @@ function checkChatHeaders() {
     // 确保这是聊天窗口顶部的联系人名称，不是消息内容或其他元素
     if (isValidChatWindowHeader(header)) {
       processHeaderForChatWindow(header);
+    }
+  });
+
+  // 3. 备用选择器 - 更通用的匹配方式
+  const fallbackItems = document.querySelectorAll(`
+        #pane-side span[title]:not([data-timezone-added]):not([class*="emoji"]):not([class*="timezone"]),
+        #pane-side span[dir="auto"][title]:not([data-timezone-added]):not([class*="emoji"]):not([class*="timezone"])
+    `);
+
+  console.log(`找到 ${fallbackItems.length} 个备用选择器项`);
+
+  fallbackItems.forEach((item) => {
+    // 确保在聊天列表区域且不是搜索结果
+    const ap1 = item.closest("._ap1_");
+    const inFirstBlock = ap1
+      ? ap1.querySelector("div:first-child")?.contains(item)
+      : true;
+    const inSecondBlock = ap1
+      ? ap1.querySelector("div:nth-child(2)")?.contains(item)
+      : false;
+
+    if (
+      item.closest("#pane-side") &&
+      !item.closest('[data-testid="search"]') &&
+      !item.closest(".timezone-display") &&
+      !item.closest("._ak8j") &&
+      inFirstBlock &&
+      !inSecondBlock
+    ) {
+      console.log(`处理备用选择器项: ${item.textContent || item.title}`);
+      processHeaderForChatList(item);
     }
   });
 }
@@ -1445,58 +1755,90 @@ function isValidChatListItem(element) {
 
 // 处理聊天列表中的联系人（上下布局）
 function processHeaderForChatList(headerElement) {
-  if (!headerElement || headerElement.hasAttribute("data-timezone-added")) {
+  if (
+    !headerElement ||
+    headerElement.hasAttribute("data-timezone-added") ||
+    headerElement.hasAttribute("data-timezone-failed")
+  ) {
     return;
   }
 
   // 验证是否为有效的聊天列表项
   if (!isValidChatListItem(headerElement)) {
+    if (DEBUG_WLT)
+      console.log(
+        `[WLT] 跳过无效列表项: "${
+          headerElement.textContent || headerElement.title || ""
+        }"`
+      );
     return;
   }
 
   const headerText = headerElement.textContent || headerElement.title || "";
   if (!headerText.trim()) return;
 
-  // 检查是否包含电话号码
-  let countryCode = extractCountryCodeFromPhone(headerText);
+  if (DEBUG_WLT) console.log(`[WLT] 解析列表名称: "${headerText}"`);
 
-  // 如果没有找到电话号码，检查是否包含国家名称
-  if (!countryCode) {
-    countryCode = extractCountryCodeFromName(headerText);
+  // 新解析优先级：名称 > 3位代码 > 2位代码 > 带+区号 > 模糊
+  const resolved = resolveCountryFromText(headerText);
+  const key = resolved
+    ? countryTimezones[resolved.matchedName]
+      ? resolved.matchedName
+      : resolved.cn
+    : countryTimezones[headerText.trim()]
+    ? headerText.trim()
+    : null;
+
+  if (!key) {
+    if (DEBUG_WLT) console.log("[WLT] 未得到国家键，放弃插入");
+    headerElement.setAttribute("data-timezone-failed", "true");
+    failedHeaderTexts.add(headerText);
+    return;
   }
 
-  if (countryCode && countryTimezones[countryCode]) {
-    addTimeDisplayToList(headerElement, countryCode, headerText);
-    headerElement.setAttribute("data-timezone-added", "true");
+  if (!countryTimezones[key]) {
+    if (DEBUG_WLT) console.log(`[WLT] countryTimezones 未找到键: ${key}`);
+    headerElement.setAttribute("data-timezone-failed", "true");
+    failedHeaderTexts.add(headerText);
+    return;
   }
+
+  addTimeDisplayToList(headerElement, key, headerText);
+  headerElement.setAttribute("data-timezone-added", "true");
 }
 
 // 处理聊天窗口中的联系人名称（水平布局）
 function processHeaderForChatWindow(headerElement) {
-  if (!headerElement || headerElement.hasAttribute("data-timezone-added")) {
+  if (
+    !headerElement ||
+    headerElement.hasAttribute("data-timezone-added") ||
+    headerElement.hasAttribute("data-timezone-failed")
+  ) {
     return;
   }
-
   // 验证是否为有效的聊天窗口标题
   if (!isValidChatWindowHeader(headerElement)) {
     return;
   }
-
   const headerText = headerElement.textContent || "";
   if (!headerText.trim()) return;
 
-  // 检查是否包含电话号码
-  let countryCode = extractCountryCodeFromPhone(headerText);
+  const resolved = resolveCountryFromText(headerText);
+  const key = resolved
+    ? countryTimezones[resolved.matchedName]
+      ? resolved.matchedName
+      : resolved.cn
+    : countryTimezones[headerText.trim()]
+    ? headerText.trim()
+    : null;
 
-  // 如果没有找到电话号码，检查是否包含国家名称
-  if (!countryCode) {
-    countryCode = extractCountryCodeFromName(headerText);
+  if (!key || !countryTimezones[key]) {
+    headerElement.setAttribute("data-timezone-failed", "true");
+    return;
   }
 
-  if (countryCode && countryTimezones[countryCode]) {
-    addTimeDisplayToWindow(headerElement, countryCode, headerText);
-    headerElement.setAttribute("data-timezone-added", "true");
-  }
+  addTimeDisplayToWindow(headerElement, key, headerText);
+  headerElement.setAttribute("data-timezone-added", "true");
 }
 
 // 为聊天列表添加时间显示（上下布局）
@@ -1504,62 +1846,98 @@ function addTimeDisplayToList(element, countryCode, originalText) {
   const timezoneInfo = countryTimezones[countryCode];
   if (!timezoneInfo) return;
 
-  // 检查是否已经存在时间显示
-  const existingDisplay =
-    element.parentNode?.querySelector(".timezone-display");
-  if (existingDisplay) return;
+  // 选择合适的插入容器：优先 ._ap1_ 的第一个 div（姓名容器）
+  const ap1 = element.closest("._ap1_");
+  const targetContainer =
+    ap1 && ap1.querySelector("div:first-child")
+      ? ap1.querySelector("div:first-child")
+      : element.parentNode || null;
+  if (!targetContainer) {
+    if (DEBUG_WLT) console.log("[WLT] 未找到插入容器");
+    return;
+  }
 
-  // 创建时间显示元素
-  const timeDisplay = document.createElement("div");
+  // 检查是否已经存在时间显示（在目标容器内）
+  const existingDisplay = targetContainer.querySelector(".timezone-display");
+  if (existingDisplay) {
+    if (DEBUG_WLT) console.log("[WLT] 已存在 timezone-display，跳过");
+    return;
+  }
+
+  // 创建时间显示元素（使用 span，避免 div 嵌入 span 的兼容性问题）
+  const timeDisplay = document.createElement("span");
   timeDisplay.className = "timezone-display timezone-list";
   timeDisplay.id = `timezone-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-  // 设置样式 - 聊天列表样式
+  // 列表样式
   timeDisplay.style.fontSize = "14px";
   timeDisplay.style.marginTop = "2px";
   timeDisplay.style.fontWeight = "400";
   timeDisplay.style.opacity = "0.8";
   timeDisplay.style.paddingLeft = "0px";
+  timeDisplay.style.display = "block"; // 确保换行显示
 
-  // 尝试插入到合适的位置
+  // 优先插入到姓名 span 之后
   let inserted = false;
-
-  // 策略1: 插入到父容器的末尾
-  if (element.parentNode && !inserted) {
-    try {
-      element.parentNode.appendChild(timeDisplay);
+  try {
+    if (element.parentNode) {
+      element.parentNode.insertBefore(timeDisplay, element.nextSibling);
       inserted = true;
+      if (DEBUG_WLT) console.log("[WLT] 插入到名称span之后");
+    }
+  } catch (e) {
+    if (DEBUG_WLT) console.log("[WLT] 名称后插入失败:", e);
+  }
+
+  // 退回：插入到姓名容器的末尾
+  if (!inserted) {
+    try {
+      targetContainer.appendChild(timeDisplay);
+      inserted = true;
+      if (DEBUG_WLT) console.log("[WLT] 插入到姓名容器末尾");
     } catch (e) {
-      console.log("聊天列表插入策略1失败");
+      if (DEBUG_WLT) console.log("[WLT] 容器末尾插入失败，尝试父节点");
+      try {
+        (element.parentNode || document.body).appendChild(timeDisplay);
+        inserted = true;
+        if (DEBUG_WLT) console.log("[WLT] 插入到父节点末尾");
+      } catch (e2) {
+        if (DEBUG_WLT) console.log("[WLT] 所有插入策略失败");
+        return;
+      }
     }
   }
 
-  if (inserted) {
-    // 立即更新一次时间
+  if (!inserted) return;
+
+  // 立即更新一次时间
+  if (DEBUG_WLT)
+    console.log(
+      `[WLT] 调用 updateTime: ${timezoneInfo.country} ${timezoneInfo.utcOffset}`
+    );
+  updateTime(
+    timeDisplay.id,
+    timezoneInfo.timezone,
+    timezoneInfo.utcOffset,
+    timezoneInfo.country
+  );
+
+  // 每分钟更新一次时间
+  const intervalId = setInterval(() => {
     updateTime(
       timeDisplay.id,
       timezoneInfo.timezone,
       timezoneInfo.utcOffset,
       timezoneInfo.country
     );
+  }, 60000);
 
-    // 每分钟更新一次时间
-    const intervalId = setInterval(() => {
-      updateTime(
-        timeDisplay.id,
-        timezoneInfo.timezone,
-        timezoneInfo.utcOffset,
-        timezoneInfo.country
-      );
-    }, 60000);
+  // 存储间隔ID以便清理
+  timeIntervals[timeDisplay.id] = intervalId;
 
-    // 存储间隔ID以便清理
-    timeIntervals[timeDisplay.id] = intervalId;
-
-    console.log(
-      `为聊天列表 ${originalText} 添加了时区显示: ${timezoneInfo.country}`
-    );
-  }
+  console.log(
+    `为聊天列表 ${originalText} 添加了时区显示: ${timezoneInfo.country}`
+  );
 }
 
 // 为聊天窗口添加时间显示（水平布局）
@@ -1643,16 +2021,20 @@ function extractCountryCodeFromPhone(text) {
   // 查找+号后的数字，或者以数字开头的情况
   let phoneMatch = cleaned.match(/\+(\d+)/);
   let numbers = phoneMatch ? phoneMatch[1] : null;
-  
+
   // 如果没有找到+号，尝试匹配以数字开头的情况（可能是没有+号的区号）
   if (!numbers) {
     const directMatch = cleaned.match(/^(\d+)/);
-    if (directMatch && directMatch[1].length >= 1 && directMatch[1].length <= 4) {
+    if (
+      directMatch &&
+      directMatch[1].length >= 1 &&
+      directMatch[1].length <= 4
+    ) {
       numbers = directMatch[1];
       console.log(`尝试识别无+号的区号: ${numbers}`);
     }
   }
-  
+
   if (!numbers) return null;
 
   // 预定义已知的国家代码列表，按长度分组，优先匹配更长的代码
@@ -1808,7 +2190,7 @@ function extractCountryCodeFromPhone(text) {
   for (const length of [4, 3, 2, 1]) {
     const possibleCode = numbers.substring(0, length);
     if (
-      knownCodes[length] && 
+      knownCodes[length] &&
       knownCodes[length].includes(possibleCode) &&
       countryTimezones[possibleCode]
     ) {
@@ -1821,7 +2203,9 @@ function extractCountryCodeFromPhone(text) {
 
   // 避免重复打印相同的未识别联系人
   if (!loggedUnrecognizedContacts.has(text)) {
-    console.log(`无法识别电话号码: ${text} (提取的数字: ${numbers})，请检查是否为支持的国家区号`);
+    console.log(
+      `无法识别电话号码: ${text} (提取的数字: ${numbers})，请检查是否为支持的国家区号`
+    );
     loggedUnrecognizedContacts.add(text);
   }
   return null;
@@ -1932,6 +2316,11 @@ function updateTime(elementId, timezone, utcOffset, countryName) {
   try {
     const now = new Date();
 
+    // 如果没有有效 IANA 时区，直接走偏移分支，避免 RangeError
+    if (!timezone) {
+      throw new Error("NO_TZ");
+    }
+
     // 使用Intl.DateTimeFormat来获取特定时区的时间
     const timeOptions = {
       timeZone: timezone,
@@ -1954,44 +2343,45 @@ function updateTime(elementId, timezone, utcOffset, countryName) {
 
     // 移除整体颜色设置，让各部分保持自己的颜色
     element.style.color = "";
+    return;
   } catch (error) {
-    console.error("时间更新错误:", error);
-    // 如果时区不支持，使用UTC偏移计算
-    const now = new Date();
-    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-
-    // 解析UTC偏移
-    const offsetMatch = utcOffset.match(/([+-])(\d{1,2}):?(\d{2})/);
-    if (offsetMatch) {
-      const sign = offsetMatch[1] === "+" ? 1 : -1;
-      const hours = parseInt(offsetMatch[2]);
-      const minutes = parseInt(offsetMatch[3] || "0");
-      const offsetMilliseconds = sign * (hours * 3600000 + minutes * 60000);
-
-      const targetTime = new Date(utc + offsetMilliseconds);
-      const hour = targetTime.getHours();
-      const minute = targetTime.getMinutes();
-      const day = targetTime.getDay();
-
-      // 简单的工作时间判断
-      const isWeekday = day >= 1 && day <= 5;
-      const isWorkHour = hour >= 9 && hour < 18;
-      const isWorking = isWeekday && isWorkHour;
-
-      const statusIcon = isWorking ? "🟢" : "🔴";
-
-      // 使用HTML结构，状态图标保持原色，时间和国家名称为黑色
-      const iconClass = isWorking ? "status-icon working" : "status-icon";
-      element.innerHTML = `<span class="${iconClass}">${statusIcon}</span><span class="time-text" style="color: #000000;">${hour
-        .toString()
-        .padStart(2, "0")}:${minute
-        .toString()
-        .padStart(2, "0")} ${countryName}</span>`;
-
-      // 移除整体颜色设置
-      element.style.color = "";
-    }
+    // 如果时区不支持或未提供，使用UTC偏移计算
   }
+
+  // 偏移兜底
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+
+  // 解析UTC偏移
+  const offsetMatch = (utcOffset || "").match(/([+-])(\d{1,2}):?(\d{2})/);
+  if (!offsetMatch) return;
+  const sign = offsetMatch[1] === "+" ? 1 : -1;
+  const hours = parseInt(offsetMatch[2]);
+  const minutes = parseInt(offsetMatch[3] || "0");
+  const offsetMilliseconds = sign * (hours * 3600000 + minutes * 60000);
+
+  const targetTime = new Date(utc + offsetMilliseconds);
+  const hour = targetTime.getHours();
+  const minute = targetTime.getMinutes();
+  const day = targetTime.getDay();
+
+  // 简单的工作时间判断
+  const isWeekday = day >= 1 && day <= 5;
+  const isWorkHour = hour >= 9 && hour < 18;
+  const isWorking = isWeekday && isWorkHour;
+
+  const statusIcon = isWorking ? "🟢" : "🔴";
+
+  // 使用HTML结构，状态图标保持原色，时间和国家名称为黑色
+  const iconClass = isWorking ? "status-icon working" : "status-icon";
+  element.innerHTML = `<span class="${iconClass}">${statusIcon}</span><span class="time-text" style="color: #000000;">${hour
+    .toString()
+    .padStart(2, "0")}:${minute
+    .toString()
+    .padStart(2, "0")} ${countryName}</span>`;
+
+  // 移除整体颜色设置
+  element.style.color = "";
 }
 
 // 添加MutationObserver以监视DOM变化
@@ -2043,7 +2433,8 @@ if (document.readyState === "loading") {
 
 function initAfterDelay() {
   setTimeout(() => {
-    init();
+    // 先加载 countries.json，再初始化扫描
+    loadCountriesJson().then(() => init());
     observeDOMChanges();
     addCustomStyles();
   }, 3000); // 等待3秒，确保WhatsApp Web完全加载
@@ -2059,37 +2450,37 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.action === "enable") {
     // 启用插件 - 重新初始化并清除之前的状态
     console.log("插件已启用，重新扫描联系人...");
-    
+
     // 清除之前的状态标记，允许重新处理
-    document.querySelectorAll('[data-timezone-added]').forEach(el => {
-      el.removeAttribute('data-timezone-added');
+    document.querySelectorAll("[data-timezone-added]").forEach((el) => {
+      el.removeAttribute("data-timezone-added");
     });
-    
+
     // 重新初始化
     init();
-    
+
     // 立即扫描现有联系人
     setTimeout(checkChatHeaders, 500);
   } else if (message.action === "disable") {
     // 禁用插件 - 清除所有时间显示
     console.log("插件已禁用，清除所有时间显示...");
-    
+
     // 清除主扫描间隔
     if (mainScanInterval) {
       clearInterval(mainScanInterval);
       mainScanInterval = null;
     }
-    
+
     // 清除所有时间显示
     document.querySelectorAll(".timezone-display").forEach((el) => el.remove());
-    
+
     // 清除所有时间更新间隔
     Object.values(timeIntervals).forEach(clearInterval);
     Object.keys(timeIntervals).forEach((key) => delete timeIntervals[key]);
-    
+
     // 清除状态标记
-    document.querySelectorAll('[data-timezone-added]').forEach(el => {
-      el.removeAttribute('data-timezone-added');
+    document.querySelectorAll("[data-timezone-added]").forEach((el) => {
+      el.removeAttribute("data-timezone-added");
     });
   }
 });

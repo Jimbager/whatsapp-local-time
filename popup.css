@@ -177,6 +177,42 @@ input:checked + .slider:before {
     margin: 4px 0;
 }
 
+/* 列表面板 */
+.countries-panel {
+    max-height: 260px;
+    overflow: auto;
+    border: 1px solid #e9edef;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.countries-panel .countries-search {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.country-item {
+    padding: 6px 4px;
+    border-bottom: 1px dashed #e9edef;
+    font-size: 12px;
+    color: #3b4a54;
+}
+
+.country-item:last-child {
+    border-bottom: none;
+}
+
+.country-meta {
+    color: #8696a0;
+    font-size: 11px;
+}
+
 /* 页脚 */
 .footer {
     text-align: center;
@@ -212,4 +248,33 @@ input:checked + .slider:before {
 
 .container {
     animation: fadeIn 0.3s ease-out;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 6px 8px;
+    background: #f0f2f5;
+    border: 1px solid #e9edef;
+    border-radius: 6px;
+    color: #3b4a54;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: #dff7e2;
+    border-color: #b7ebc6;
+    color: #128c7e;
+    font-weight: 600;
+}
+
+.tab-panel {
+    margin-bottom: 12px;
 } 
