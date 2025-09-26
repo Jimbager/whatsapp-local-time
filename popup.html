@@ -6,75 +6,73 @@
     <title>WhatsApp 当地时间显示器</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h2>🌍 WhatsApp 当地时间显示器</h2>
-        <p>在聊天界面显示联系人当地时间</p>
-      </div>
+  <body class="container">
+    <div class="header">
+      <h2>🌍 WhatsApp 当地时间显示器</h2>
+      <p>在聊天界面显示联系人当地时间</p>
+    </div>
 
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="features">功能</button>
-        <button class="tab-btn" data-tab="guide">说明</button>
-        <button class="tab-btn" data-tab="countries">国家列表</button>
-      </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="features">功能</button>
+      <button class="tab-btn" data-tab="guide">说明</button>
+      <button class="tab-btn" data-tab="countries">国家列表</button>
+    </div>
 
-      <div class="tab-panel" id="tab-features" style="display: block">
-        <div class="status-section">
-          <div class="status-info">
-            <span>状态:</span>
-            <span id="statusText" class="status-active">已启用</span>
-          </div>
-          <label class="switch">
-            <input type="checkbox" id="enableToggle" checked />
-            <span class="slider"></span>
-          </label>
+    <div class="tab-panel" id="tab-features" style="display: block">
+      <div class="status-section">
+        <div class="status-info">
+          <span>状态:</span>
+          <span id="statusText" class="status-active">已启用</span>
         </div>
+        <label class="switch">
+          <input type="checkbox" id="enableToggle" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-guide" style="display: none">
+      <div class="info-section">
+        <h3>使用说明</h3>
+        <ol>
+          <li>联系人名称包含国家/地区名称，或包含电话号码区号（如+92）。</li>
+          <li>插件会自动识别并显示当地时间。</li>
+        </ol>
       </div>
 
-      <div class="tab-panel" id="tab-guide" style="display: none">
-        <div class="info-section">
-          <h3>使用说明</h3>
-          <ol>
-            <li>联系人名称包含国家/地区名称，或包含电话号码区号（如+92）。</li>
-            <li>插件会自动识别并显示当地时间。</li>
-          </ol>
+      <div class="supported-countries">
+        <h3>支持的国家/地区</h3>
+        <p class="countries-count">
+          <span class="count-number" id="countryCount">--</span> 个国家和地区
+        </p>
+        <p class="countries-note">
+          包括亚洲、欧洲、美洲、非洲、大洋洲各主要国家
+        </p>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-countries" style="display: none">
+      <div id="countriesPanel" class="countries-panel" style="display: block">
+        <div class="countries-search">
+          <input
+            id="countrySearch"
+            type="text"
+            placeholder="搜索国家/别称/代码/区号"
+            style="
+              width: 100%;
+              padding: 6px 8px;
+              border: 1px solid #e9edef;
+              border-radius: 6px;
+              font-size: 12px;
+            "
+          />
         </div>
+        <div id="countriesList"></div>
       </div>
+    </div>
 
-      <div class="tab-panel" id="tab-countries" style="display: none">
-        <div class="supported-countries">
-          <h3>支持的国家/地区</h3>
-          <p class="countries-count">
-            <span class="count-number" id="countryCount">--</span> 个国家和地区
-          </p>
-          <p class="countries-note">
-            包括亚洲、欧洲、美洲、非洲、大洋洲各主要国家
-          </p>
-        </div>
-
-        <div id="countriesPanel" class="countries-panel" style="display: block">
-          <div class="countries-search" style="margin-bottom: 8px">
-            <input
-              id="countrySearch"
-              type="text"
-              placeholder="搜索国家/别称/代码/区号"
-              style="
-                width: 100%;
-                padding: 6px 8px;
-                border: 1px solid #e9edef;
-                border-radius: 6px;
-                font-size: 12px;
-              "
-            />
-          </div>
-          <div id="countriesList"></div>
-        </div>
-      </div>
-
-      <div class="footer">
-        <p>版本 1.1.1</p>
-      </div>
+    <div class="footer">
+      <p>版本 1.2.0</p>
     </div>
 
     <script src="popup.js"></script>
